@@ -7,7 +7,9 @@ def convert_to_sim_network(input_file, output_file):
 
     sim_network = []
 
-    for edge in data['edges']:
+    scid_block = 300
+    
+    for index, edge in enumerate(data['edges']):
         node_1_policy = edge.get('node1_policy', None)
         node_2_policy = edge.get('node2_policy', None)
 
@@ -16,14 +18,20 @@ def convert_to_sim_network(input_file, output_file):
             continue
 
         # Capacity is expressed in sats.
-        capacity_msat =  int(edge['capacity']) * 1000
+        capacity_msat = int(edge['capacity']) * 1000
+
+        # Calculate short channel ID, based on warnet indexing
+        scid_tx_index = 1
+        scid_output_index = 0
+
+        scid = (scid_block << 40) | (scid_tx_index << 16) | scid_output_index
 
         node_1 = {
             "pubkey": edge['node1_pub'],
             "max_htlc_count": 483,
             "max_in_flight_msat": capacity_msat,
             "min_htlc_size_msat": int(node_1_policy['min_htlc']),
-            "max_htlc_size_msat":  int(node_1_policy['max_htlc_msat']),
+            "max_htlc_size_msat": int(node_1_policy['max_htlc_msat']),
             "cltv_expiry_delta": int(node_1_policy['time_lock_delta']),
             "base_fee": int(node_1_policy['fee_base_msat']),
             "fee_rate_prop": int(node_1_policy['fee_rate_milli_msat'])
@@ -34,13 +42,11 @@ def convert_to_sim_network(input_file, output_file):
             "max_htlc_count": 15,
             "max_in_flight_msat": capacity_msat,
             "min_htlc_size_msat": int(node_2_policy['min_htlc']),
-            "max_htlc_size_msat": int(node_2_policy['max_htlc_msat'])
+            "max_htlc_size_msat": int(node_2_policy['max_htlc_msat']),
             "cltv_expiry_delta": int(node_2_policy['time_lock_delta']),
             "base_fee": int(node_2_policy['fee_base_msat']),
             "fee_rate_prop": int(node_2_policy['fee_rate_milli_msat'])
         }
-
-        scid = int(edge['channel_id'])
 
         sim_network.append({
             "scid": scid,
@@ -48,6 +54,9 @@ def convert_to_sim_network(input_file, output_file):
             "node_1": node_1,
             "node_2": node_2
         })
+
+        # Add one to scid block height, as we create one channel per block.
+        scid_block += 1
 
     output_data = {"sim_network": sim_network}
 
