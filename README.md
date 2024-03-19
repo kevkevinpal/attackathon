@@ -38,6 +38,15 @@ format.
 To convert LND's graph (`graph.json`) to a `sim_graph.json` for SimLN:
 `python ./setup/lnd_to_simln.py graph.json`
 
+To prepare a SimLN file that can be used to generate data for warnet, 
+the script will perform the following operations:
+- Reformat the graph file to the input format that SimLN requires
+- Replace short channel ids with deterministically generated short 
+  channel ids: 
+  - Block height = 300 + index of channel in json
+  - Transaction index = 1
+  - Output index = 0
+
 ### 2. Run SimLN to Generate Data
 
 Next, run SimLN with the generated simulation file setting the total 
