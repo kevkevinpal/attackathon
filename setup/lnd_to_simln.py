@@ -1,47 +1,51 @@
 import json
 import sys
 
-def convert_input_to_output(input_file, output_file):
+def convert_to_sim_network(input_file, output_file):
     with open(input_file, 'r') as f:
         data = json.load(f)
 
     sim_network = []
 
     for edge in data['edges']:
-        node1_pub = edge['node1_pub']
-        node2_pub = edge['node2_pub']
-        capacity_msat = int(edge['capacity'])
+        node_1_policy = edge['node1_policy']
+        node_2_policy = edge['node2_policy']
 
-        node1_policy = edge['node1_policy']
-        node2_policy = edge['node2_policy']
+        max_htlc_size_msat_1 = int(node_1_policy['max_htlc_msat'])
+        if max_htlc_size_msat_1 > int(edge['capacity']):
+            max_htlc_size_msat_1 = int(edge['capacity'])
+
+        max_htlc_size_msat_2 = int(node_2_policy['max_htlc_msat'])
+        if max_htlc_size_msat_2 > int(edge['capacity']):
+            max_htlc_size_msat_2 = int(edge['capacity'])
 
         node_1 = {
-            "pubkey": node1_pub,
+            "pubkey": edge['source'],
             "max_htlc_count": 483,
-            "max_in_flight_msat": capacity_msat,
-            "min_htlc_size_msat": 1,
-            "max_htlc_size_msat": capacity_msat,
-            "cltv_expiry_delta": node1_policy['time_lock_delta'],
-            "base_fee": int(node1_policy['fee_base_msat']),
-            "fee_rate_prop": int(node1_policy['fee_rate_milli_msat'])
+            "max_in_flight_msat": int(edge['capacity']),
+            "min_htlc_size_msat": int(node_1_policy['min_htlc']),
+            "max_htlc_size_msat": max_htlc_size_msat_1,
+            "cltv_expiry_delta": int(node_1_policy['time_lock_delta']),
+            "base_fee": int(node_1_policy['fee_base_msat']),
+            "fee_rate_prop": int(node_1_policy['fee_rate_milli_msat'])
         }
 
         node_2 = {
-            "pubkey": node2_pub,
-            "max_htlc_count": 483,
-            "max_in_flight_msat": capacity_msat,
-            "min_htlc_size_msat": 1,
-            "max_htlc_size_msat": capacity_msat,
-            "cltv_expiry_delta": node2_policy['time_lock_delta'],
-            "base_fee": int(node2_policy['fee_base_msat']),
-            "fee_rate_prop": int(node2_policy['fee_rate_milli_msat'])
+            "pubkey": edge['target'],
+            "max_htlc_count": 15,
+            "max_in_flight_msat": int(edge['capacity']),
+            "min_htlc_size_msat": int(node_2_policy['min_htlc']),
+            "max_htlc_size_msat": max_htlc_size_msat_2,
+            "cltv_expiry_delta": int(node_2_policy['time_lock_delta']),
+            "base_fee": int(node_2_policy['fee_base_msat']),
+            "fee_rate_prop": int(node_2_policy['fee_rate_milli_msat'])
         }
 
-        scid = len(sim_network) + 1
+        scid = int(edge['channel_id'])
 
         sim_network.append({
             "scid": scid,
-            "capacity_msat": capacity_msat,
+            "capacity_msat": int(edge['capacity']),
             "node_1": node_1,
             "node_2": node_2
         })
@@ -53,10 +57,10 @@ def convert_input_to_output(input_file, output_file):
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:
-        print("Usage: python script.py input_file.json")
+        print("Usage: python script.py input_file")
         sys.exit(1)
 
     input_file = sys.argv[1]
-    output_file = "sim_graph.json"  # Assuming the output file name
+    output_file = input_file.split('.')[0] + '_simln.json'
 
-    convert_input_to_output(input_file, output_file)
+    convert_to_sim_network(input_file, output_file)
