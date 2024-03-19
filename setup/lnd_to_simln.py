@@ -8,8 +8,12 @@ def convert_to_sim_network(input_file, output_file):
     sim_network = []
 
     for edge in data['edges']:
-        node_1_policy = edge['node1_policy']
-        node_2_policy = edge['node2_policy']
+        node_1_policy = edge.get('node1_policy', None)
+        node_2_policy = edge.get('node2_policy', None)
+
+        if not node_1_policy or not node_2_policy:
+            print(f"Warning: Skipping edge with channel ID {edge['channel_id']} because node1 or node2 policy is null.")
+            continue
 
         max_htlc_size_msat_1 = int(node_1_policy['max_htlc_msat'])
         if max_htlc_size_msat_1 > int(edge['capacity']):
