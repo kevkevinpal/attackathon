@@ -15,37 +15,26 @@ def convert_to_sim_network(input_file, output_file):
             print(f"Warning: Skipping edge with channel ID {edge['channel_id']} because node1 or node2 policy is null.")
             continue
 
-        source = edge.get('source', None)
-        target = edge.get('target', None)
-        if not source or not target:
-            print(f"Warning: Skipping edge with channel ID {edge['channel_id']} because source or target pubkey is missing.")
-            continue
-
-        max_htlc_size_msat_1 = int(node_1_policy['max_htlc_msat'])
-        if max_htlc_size_msat_1 > int(edge['capacity']):
-            max_htlc_size_msat_1 = int(edge['capacity'])
-
-        max_htlc_size_msat_2 = int(node_2_policy['max_htlc_msat'])
-        if max_htlc_size_msat_2 > int(edge['capacity']):
-            max_htlc_size_msat_2 = int(edge['capacity'])
+        # Capacity is expressed in sats.
+        capacity_msat =  int(edge['capacity']) * 1000
 
         node_1 = {
-            "pubkey": edge['source'],
+            "pubkey": edge['node1_pub'],
             "max_htlc_count": 483,
-            "max_in_flight_msat": int(edge['capacity']),
+            "max_in_flight_msat": capacity_msat,
             "min_htlc_size_msat": int(node_1_policy['min_htlc']),
-            "max_htlc_size_msat": max_htlc_size_msat_1,
+            "max_htlc_size_msat":  int(node_1_policy['max_htlc_msat']),
             "cltv_expiry_delta": int(node_1_policy['time_lock_delta']),
             "base_fee": int(node_1_policy['fee_base_msat']),
             "fee_rate_prop": int(node_1_policy['fee_rate_milli_msat'])
         }
 
         node_2 = {
-            "pubkey": edge['target'],
+            "pubkey": edge['node2_pub'],
             "max_htlc_count": 15,
-            "max_in_flight_msat": int(edge['capacity']),
+            "max_in_flight_msat": capacity_msat,
             "min_htlc_size_msat": int(node_2_policy['min_htlc']),
-            "max_htlc_size_msat": max_htlc_size_msat_2,
+            "max_htlc_size_msat": int(node_2_policy['max_htlc_msat'])
             "cltv_expiry_delta": int(node_2_policy['time_lock_delta']),
             "base_fee": int(node_2_policy['fee_base_msat']),
             "fee_rate_prop": int(node_2_policy['fee_rate_milli_msat'])
@@ -55,7 +44,7 @@ def convert_to_sim_network(input_file, output_file):
 
         sim_network.append({
             "scid": scid,
-            "capacity_msat": int(edge['capacity']),
+            "capacity_msat": capacity_msat,
             "node_1": node_1,
             "node_2": node_2
         })
