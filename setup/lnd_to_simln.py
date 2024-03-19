@@ -15,6 +15,12 @@ def convert_to_sim_network(input_file, output_file):
             print(f"Warning: Skipping edge with channel ID {edge['channel_id']} because node1 or node2 policy is null.")
             continue
 
+        source = edge.get('source', None)
+        target = edge.get('target', None)
+        if not source or not target:
+            print(f"Warning: Skipping edge with channel ID {edge['channel_id']} because source or target pubkey is missing.")
+            continue
+
         max_htlc_size_msat_1 = int(node_1_policy['max_htlc_msat'])
         if max_htlc_size_msat_1 > int(edge['capacity']):
             max_htlc_size_msat_1 = int(edge['capacity'])
