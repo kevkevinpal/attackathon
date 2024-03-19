@@ -46,6 +46,8 @@ the script will perform the following operations:
   - Block height = 300 + index of channel in json
   - Transaction index = 1
   - Output index = 0
+- Set an alias for each node equal to their index in the list of 
+  nodes provided in the original graph file.
 
 ### 2. Run SimLN to Generate Data
 

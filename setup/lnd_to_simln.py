@@ -5,6 +5,9 @@ def convert_to_sim_network(input_file, output_file):
     with open(input_file, 'r') as f:
         data = json.load(f)
 
+    nodes = data.get('nodes', [])
+    node_pubkey_index = {node['id']: index for index, node in enumerate(nodes)}
+
     sim_network = []
 
     scid_block = 300
@@ -26,8 +29,15 @@ def convert_to_sim_network(input_file, output_file):
 
         scid = (scid_block << 40) | (scid_tx_index << 16) | scid_output_index
 
+        node_1_pubkey = edge['node1_pub']
+        node_2_pubkey = edge['node2_pub']
+
+        node_1_alias = node_pubkey_index.get(node_1_pubkey)
+        node_2_alias = node_pubkey_index.get(node_2_pubkey)
+
         node_1 = {
-            "pubkey": edge['node1_pub'],
+            "pubkey": node_1_pubkey,
+            "alias": node_1_alias,
             "max_htlc_count": 483,
             "max_in_flight_msat": capacity_msat,
             "min_htlc_size_msat": int(node_1_policy['min_htlc']),
@@ -38,7 +48,8 @@ def convert_to_sim_network(input_file, output_file):
         }
 
         node_2 = {
-            "pubkey": edge['node2_pub'],
+            "pubkey": node_2_pubkey,
+            "alias": node_2_alias,
             "max_htlc_count": 15,
             "max_in_flight_msat": capacity_msat,
             "min_htlc_size_msat": int(node_2_policy['min_htlc']),
