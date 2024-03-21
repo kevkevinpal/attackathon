@@ -32,8 +32,8 @@ def convert_to_sim_network(input_file, output_file):
         node_1_pubkey = edge['node1_pub']
         node_2_pubkey = edge['node2_pub']
 
-        node_1_alias = node_pubkey_index.get(node_1_pubkey)
-        node_2_alias = node_pubkey_index.get(node_2_pubkey)
+        node_1_alias = str(node_pubkey_index.get(node_1_pubkey))
+        node_2_alias = str(node_pubkey_index.get(node_2_pubkey))
 
         node_1 = {
             "pubkey": node_1_pubkey,
