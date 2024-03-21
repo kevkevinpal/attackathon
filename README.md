@@ -49,6 +49,9 @@ the script will perform the following operations:
 - Set an alias for each node equal to their index in the list of 
   nodes provided in the original graph file.
 
+The script will output a json file with the same name as the input file, 
+with a `simln.json` suffix added in the current directory.
+
 ### 2. Run SimLN to Generate Data
 
 Next, run SimLN with the generated simulation file setting the total 
