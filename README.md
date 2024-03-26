@@ -72,4 +72,15 @@ before running the attackathon warnet. Note that the payment activity
 can be pre-generated, but this "fast fowwarding" must be done at the 
 time the warnet is spun up (or future dated to a known start time).
 
-TODO: script to update timestamps
+To progress the timestamps in your generated data such that the latest
+timestamp reported by the simulation is set to the present (and all 
+others are appropriately "fast-forwarded"), use the following command:
+
+`python setup/progress_timestamps.py htlc_forwards.csv`
+
+It will output `htlc_forwards_timewarp.csv` which has the updated 
+forwarding data.
+
+### 4. Run warnet
+
+
