@@ -8,6 +8,9 @@ Participants do not need to read the following section, it contains
 instructions on how to setup a warnet network to run the attackathon 
 on.
 
+<details>
+ <summary>Setup Instructions</summary>
+
 ## Payment Bootstrap
 
 To run a realistic attackathon, nodes in the network need to be 
@@ -140,4 +143,4 @@ to your wanet's credentials and run it.
 `warcli network export` -> {warnet path}
 `sim-cli --sim-file {warnet path}/sim.json`
 
-
+</details>
