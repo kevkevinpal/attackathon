@@ -1,6 +1,82 @@
 # Attackathon
 
-Let's break lightning! 
+Let's break lightning!
+
+## Task 
+
+In this attackathon, your task will be to write a program that performs 
+a [channel jamming attack](https://bitcoinops.org/en/topics/channel-jamming-attacks/) 
+against a test lightning network.
+
+You will be required to write a program that performs a jamming attack 
+against a node in the test network. Your goal is to *completely jam 
+all of the node's channels for an hour*.
+
+Your program should: 
+- Accept the following parameters: 
+  - LND configuration details (parameters TODO)
+  - Target node public key
+- Write an attack against the [hybrid approach to jamming mitigations]()
+  which is deployed on the network*.
+- Open any channels required to perform the attack, and close them 
+  when the attack has competed.
+
+APIS to note: 
+- [AddHoldInvoice](https://lightning.engineering/api-docs/api/lnd/invoices/add-hold-invoice)
+  provides more granular control over HTLC 
+- We are running a [fork of LND](TODO) which surfaces endorsement 
+  signalling on ??? api. (TODO - check sendtoroute)
+  
+* Note that endorsement signaling and reputation tracking are fully 
+deployed on the test network, but unconditional fees are not. You should
+assume that they will be 1% of your success-case fees, and we will 
+account for them during attack analysis.
+
+## Network
+
+The attack you develop will be tested against a [warnet](https://warnet.dev/)
+running a network of LND nodes that have the jamming attack mitigation 
+implemented (via an external tool called circuitbreaker).
+
+Some relevant characteristics of the network: 
+- The reputation system has been primed with historical forwarding 
+  data, so nodes in the network have already had a chance to build 
+  up reputation before the attack begins.
+- The graph was obtained by reducing the mainnet graph using a 
+  random walk around our target node, and real-world routing policies 
+  are used.
+- When you run the attack, the non-malicious nodes in the network will 
+  be executing [randomly generated payments](https://simln.dev) to 
+  mimic an active network.
+
+To assist with local development, we've provided a test network that 
+can be used to run your attacks against. Please follow the instructions 
+[here](TODO) to set it up!
+
+We're trying to break channel jamming mitigations, not our setup itself
+so please be a good sport and let us know if there's anything buggy! 
+Real attackers won't be able to take advantage of our test setup, so 
+neither should we.
+
+
+## Deliverables
+
+TODO: warnet scenario + docker image
+
+## Assessment
+
+Attacks will be assessed using the following measures:
+- Did the attacker successfully occupy the resources of the targeted 
+  node such that it could not process honest payments?
+- What was the total cost of the attack, considering:
+  - On-chain fees: for channel opens and closes, sending funds between 
+    nodes on-chain will node be included for simplicity's sake.
+  - Off-chain fees: the sum of fees paid for successful off-chain 
+    payments plus 1% of the success-case fees for *all* payments that 
+    are sent to represent unconditional fees.
+  - Opportunity cost of capital: for each channel that is opened, 5% 
+    p.a. charged on the total capital deployed in the channels, 
+    assuming 10 minute blocks.
 
 ## Setup
 
