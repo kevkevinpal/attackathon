@@ -74,7 +74,7 @@ repository to be in the current directory.
 * Warnet server: [./attackathon/scripts/run_warnet.sh](./scripts/run_warnet.sh) 
   sets up the warnet server, which is responsible for orchestration of 
   the network.
-* Warnet cli: [./attackathon/scripts/start_network.sh](/.scripts/start_network.sh)
+* Warnet cli: [./attackathon/scripts/run_attack.sh](/.scripts/start_network.sh)
   brings up your lightning network, opens channels and simulates 
   random payments in the network and runs your attack.
 
