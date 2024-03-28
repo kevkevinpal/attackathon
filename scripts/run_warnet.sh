@@ -9,7 +9,7 @@ cd warnet
 # TODO: pin to a certain commit
 # git checkout XYZ 
 
-python3 -m venv .venv  # Use alternative venv manager if desired
+python3 -m venv .venv
 source .venv/bin/activate
 pip install --upgrade pip
 pip install -e .

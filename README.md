@@ -49,9 +49,33 @@ Some relevant characteristics of the network:
   be executing [randomly generated payments](https://simln.dev) to 
   mimic an active network.
 
+### Local Development
+
 To assist with local development, we've provided a test network that 
-can be used to run your attacks against. Please follow the instructions 
-[here](TODO) to set it up!
+can be used to run your attacks against. Prerequisites to set up this 
+network are: 
+* Python3
+* Docker
+
+Clone the attackathon repo:
+`git clone https://github.com/carlaKC/attackathon`
+
+*Do not change directory.*
+
+The scripts will pull the relevant repositories to your current working
+directory and set up your network. They expect the `attackathon` 
+repository to be in the current directory.
+* Warnet server: [./attackathon/scripts/run_warnet.sh](./scripts/run_warnet.sh) 
+  sets up the warnet server, which is responsible for orchestration of 
+  the network.
+* Warnet cli: [./attackathon/scripts/start_network.sh](/.scripts/start_network.sh)
+  brings up your lightning network, opens channels and simulates 
+  random payments in the network.
+
+To run your attack against this network: 
+`warcli scenario attack_ln` TODO!
+
+### HackNicePlz
 
 We're trying to break channel jamming mitigations, not our setup itself
 so please be a good sport and let us know if there's anything buggy! 
