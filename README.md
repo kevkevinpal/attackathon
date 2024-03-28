@@ -138,7 +138,7 @@ version of the mainnet graph, as you'll already have the data in this
 format.
 
 To convert LND's graph (`graph.json`) to a `sim_graph.json` for SimLN:
-`python setup/lnd_to_simln.py graph.json`
+`python setup/lnd_to_simln.py graph.json {output location}`
 
 To prepare a SimLN file that can be used to generate data for warnet, 
 the script will perform the following operations:
@@ -151,8 +151,6 @@ the script will perform the following operations:
 - Set an alias for each node equal to their index in the list of 
   nodes provided in the original graph file.
 
-The script will output a json file with the same name as the input file, 
-with a `simln.json` suffix added in the current directory.
 
 ### 2. Run SimLN to Generate Data
 
