@@ -88,6 +88,7 @@ source .venv/bin/activate > /dev/null 2>&1
 pip install -e . > /dev/null 2>&1 
 
 # Run warnet in the background and capture pid for shutdown.
+# NB!!! currently running on: https://github.com/carlaKC/warnet/tree/attackathon-network
 warnet &
 warnet_pid=$!
 
