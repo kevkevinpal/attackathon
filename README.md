@@ -110,125 +110,30 @@ on.
 <details>
  <summary>Setup Instructions</summary>
 
-## Payment Bootstrap
+To get started, you will need to clone the following repos *in the same
+working directory*:
+1. [This repo](https://github.com/carlaKC/attackathon)
+2. [Warnet](https://github.com/bitcoin-dev-project/warnet)
+3. [SimLN](https://github.com/bitcoin-dev-project/sim-ln)
 
-To run a realistic attackathon, nodes in the network need to be 
-bootstrapped with payment history to build up their reputation scores 
-for honest nodes in the network. We're interested in bootstrapping 6 
-months of data (as this is the duration we look at in the proposal), 
-so we need to simulate and insert that data (rather than leave a warnet 
-running for 6 months / try to mess with time).
+You will need to provide: 
+1. A `json` file with the same format as LND's `describegraph` output 
+  which describes the graph that you'd like to simulate.
+2. The duration of time, expressed in seconds, that you'd like the 
+  setup script to generate fake historical forwards for all the nodes 
+  in the network for.
 
-The steps for payment bootstrapping are:
-1. Select desired topology for attackathon
-2. Run [SimLN](https://github.com/bitcoin-dev-project/sim-ln) in 
-   `sim_network` mode to generate fake payment data for the network 
-   with simulation time (not real time).
-3. Convert simulation timestamps to real dates.
-4. Run warnet with the same topology, and import data via 
-   [Circuitbreaker](https://github.com/lightningequipment/circuitbreaker)
+The setup script provided will generate all required files for you:
+`./attackathon/setup/create_network.sh {path to json file} {duration in seconds}`
 
-### 1. Choose Topology
+Note that you *must* run this from your directory containing `warnet` 
+and `simln` because it moves between directories to achieve various 
+tasks! The name that you give the `json` file is considered to be 
+your `network_name`. 
 
-SimLN requires a description of the desired topology to generate data. 
-The [lnd_to_simln.py](./setup/lnd_to_simln.py) script can be used to 
-convert the output of LND's `describegraph` command to a simulation 
-file for SimLN. This utility is useful when simulating a reduced 
-version of the mainnet graph, as you'll already have the data in this 
-format.
-
-To convert LND's graph (`graph.json`) to a `sim_graph.json` for SimLN:
-`python setup/lnd_to_simln.py graph.json {output location}`
-
-To prepare a SimLN file that can be used to generate data for warnet, 
-the script will perform the following operations:
-- Reformat the graph file to the input format that SimLN requires
-- Replace short channel ids with deterministically generated short 
-  channel ids: 
-  - Block height = 300 + index of channel in json
-  - Transaction index = 1
-  - Output index = 0
-- Set an alias for each node equal to their index in the list of 
-  nodes provided in the original graph file.
-
-
-### 2. Run SimLN to Generate Data
-
-Next, run SimLN with the generated simulation file setting the total 
-time flag to the amount of time that you'd like to generate data for:
-`sim-cli --sim-file={path to sim_graph.json} --total-time=1.577e+7`
-
-When the simulator has finished generating data in its simulated 
-network, the output will be available in `results/htlc_forwards.csv`.
-This file contains a record of every forward that the network has 
-processed during the period provided.
-
-### 3. Convert Simulation Timestamps
-
-For the attackathon, we want nodes to have _recent_ timestamps so that 
-honest peers reputation is up to date. This means that we'll always 
-need to progress the timestamps in `htlc_forwards.csv` to the present 
-before running the attackathon warnet. Note that the payment activity 
-can be pre-generated, but this "fast fowwarding" must be done at the 
-time the warnet is spun up (or future dated to a known start time).
-
-To progress the timestamps in your generated data such that the latest
-timestamp reported by the simulation is set to the present (and all 
-others are appropriately "fast-forwarded"), use the following command:
-
-`python setup/progress_timestamps.py ln_10_raw_data.csv data/ln_10_data.csv`
-
-This will write the csv file with the updated timestamps to 
-`data/ln_10_data.csv`.
-
-Note that you'll want to do this step every time for fresh data!
-
-### 4. Create Warnet Topology
-
-Once you've generated data for your network, and progressed your 
-timestamps to the present, you'll want to create a warnet graphml 
-file that specifies your topology.
-
-`git clone https://github.com/bitcoin-dev-project/warnet`
-`git checkout XYZ` <- we'll have a hackathon branch w/ stuff?
-
-```
-python3 -m venv .venv # Use alternative venv manager if desired
-source .venv/bin/activate
-pip install --upgrade pip
-pip install -e .
-```
-
-If you run into problems, check the [installation instructions](https://github.com/bitcoin-dev-project/warnet/blob/main/docs/install.md)
-as this doc may be outdated!
-
-Warnet operates with a server and a cli, so you'll need to start the 
-server: 
-`warnet`
-
-Once you've started the server, you can use its cli to generate a 
-graph file for the graph you've chosen and the data you've prepared:
-
-`warcli network import-json {graph.json} --cb_data={ln_10_data.csv} --outfile={dest}`
-
-### 5. Run warnet
-
-Finally, you can use the file generated in the previous step to bring 
-up your warnet:
-`warcli network up {dest} --force`
-
-Next, to setup the lightning channels in your network:
-`warcli scenario run ln_init'
-
-This may take a while, because it opens up one channel per block and 
-waits for gossip to be fully synced. You *must* wait for this to 
-complete before proceeding to the next step!
-
-TODO: removeme once sim-ln is natively added!
-`git clone https://github.com/bitcoin-dev-project/sim-ln`
-`cargo install --locked --path sim-cli`
-
-`warcli network export` -> {warnet path}
-`sim-cli --sim-file {warnet path}/sim.json`
+Once the script has completed, check in any files that it generated and 
+provide your students with the following: 
+1. The `network_name` for your attackathon.
+2. The attackathon repo (/branch) with all files checked in.
 
 </details>
