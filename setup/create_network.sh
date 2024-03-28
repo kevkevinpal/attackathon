@@ -29,15 +29,11 @@ fi
 json_file="$1"
 duration="$2"
 
+current_directory=$(pwd)
+
 # Check if JSON file exists
 if [ ! -f "$json_file" ]; then
     echo "Error: JSON file '$json_file' not found."
-    exit 1
-fi
-
-# Check if duration is valid
-if ! [[ $duration =~ ^[0-9]+[smh]$ ]]; then
-    echo "Error: Invalid duration format. Please provide duration in Linux duration format (e.g., 10s, 1m, etc)."
     exit 1
 fi
 
@@ -45,4 +41,29 @@ file_name=$(basename "$json_file" .json)
 echo "Setting up network for $file_name"
 
 echo "Generating sim-ln file for historical payment generation"
-python3 attackathon/setup/lnd_to_simln.py "$json_file" attackathon/data/"$file_name"_simln.json
+simfile="$current_directory/attackathon/data/"$file_name"_simln.json"
+python3 attackathon/setup/lnd_to_simln.py "$json_file" "$simfile"
+cd sim-ln
+
+if [[ -n $(git status --porcelain) ]]; then
+    echo "Error: there are unsaved changes in sim-ln, please stash them!"
+    exit 1
+fi
+
+# Grab branch that has data writing.
+git remote add carla https://github.com/carlaKC/sim-ln
+
+# Silence some of the louder output.
+git fetch carla > /dev/null 2>&1 
+git checkout carla/sim-data > /dev/null 2>&1 
+
+echo "Installing sim-ln for data generation"
+cargo install --locked --path sim-cli
+
+# Clean up after ourselves.
+git remote remove carla
+git checkout main > /dev/null 2>&1 
+
+echo "Generating historical data for $duration seconds, this might take a while!"
+sim-cli -l debug -c 10 -s "$simfile" -t "$duration"
+
