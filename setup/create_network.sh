@@ -67,3 +67,39 @@ git checkout main > /dev/null 2>&1
 echo "Generating historical data for $duration seconds, this might take a while!"
 sim-cli -l debug -c 10 -s "$simfile" -t "$duration"
 
+# Copy the raw sim-ln data from its output folder to our attackathon data dir. 
+raw_data="$current_directory"/attackathon/data/"$file_name"_raw_data.csv
+cp results/htlc_forwards.csv "$raw_data"
+cd ..
+
+# Set the location where we'll output our progressed timestamp output.
+processed_data="$current_directory"/attackathon/data/"$file_name"_data.csv
+
+# Before we actually bump our timestamps, we'll spin up warnet to generate a graphml file that
+# will use our generated data.
+echo "Generating warnet file for network"
+cd warnet 
+python3 -m venv .venv > /dev/null 2>&1 
+source .venv/bin/activate > /dev/null 2>&1 
+pip install -e . > /dev/null 2>&1 
+
+# Run warnet in the background and capture pid for shutdown.
+warnet &
+warnet_pid=$!
+
+warnet_file="$current_directory"/attackathon/data/"$file_name".graphml
+warcli graph import-json "$json_file" --cb_data="$processed_data" --outfile="$warnet_file" > /dev/null 2>&1 
+
+# Shut warnet down
+kill $warnet_pid
+wait $warnet_pid 2>/dev/null
+
+cd ..
+
+# Finally, progress our timstamps so that we're ready to roll!
+# The user-provided scripts should do this anyway, but we update them to know it works.
+python3 ./attackathon/setup/progress_timestamps.py "$raw_data" "$processed_data"
+
+echo "Setup complete!"
+
+echo "To run your network use: warcli network start "$warnet_file" --force"
