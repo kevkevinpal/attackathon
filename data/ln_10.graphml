@@ -7,6 +7,7 @@ http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
   <key id="image" for="node" attr.name="image" attr.type="string" />
   <key id="ln_config" for="node" attr.name="ln_config" attr.type="string" />
   <key id="ln_cb_image" for="node" attr.name="ln_cb_image" attr.type="string" />
+  <key id="ln_cb_data"      attr.name="ln_cb_data"       attr.type="string"   for="node" />
   <key id="ln" for="node" attr.name="ln" attr.type="string" />
   <key id="collect_logs" for="node" attr.name="collect_logs" attr.type="boolean" />
   <key id="exporter" for="node" attr.name="exporter" attr.type="boolean" />
@@ -24,6 +25,7 @@ http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
       <data key="collect_logs">False</data>
       <data key="ln">lnd</data>
       <data key="ln_cb_image">carlakirkcohen/circuitbreaker:endorsement-experiment</data>
+	  <data key="ln_cb_data">/Users/carla/Work/attackathon/data/ln_10_data.csv</data>
       <data key="ln_config">--protocol.wumbo-channels</data>
     </node>
     <node id="1">
@@ -35,6 +37,7 @@ http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
       <data key="collect_logs">False</data>
       <data key="ln">lnd</data>
       <data key="ln_cb_image">carlakirkcohen/circuitbreaker:endorsement-experiment</data>
+	  <data key="ln_cb_data">/Users/carla/Work/attackathon/data/ln_10_data.csv</data>
       <data key="ln_config">--protocol.wumbo-channels</data>
     </node>
     <node id="2">
@@ -46,6 +49,7 @@ http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
       <data key="collect_logs">False</data>
       <data key="ln">lnd</data>
       <data key="ln_cb_image">carlakirkcohen/circuitbreaker:endorsement-experiment</data>
+	  <data key="ln_cb_data">/Users/carla/Work/attackathon/data/ln_10_data.csv</data>
       <data key="ln_config">--protocol.wumbo-channels</data>
     </node>
     <node id="3">
@@ -57,6 +61,7 @@ http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
       <data key="collect_logs">False</data>
       <data key="ln">lnd</data>
       <data key="ln_cb_image">carlakirkcohen/circuitbreaker:endorsement-experiment</data>
+	  <data key="ln_cb_data">/Users/carla/Work/attackathon/data/ln_10_data.csv</data>
       <data key="ln_config">--protocol.wumbo-channels</data>
     </node>
     <node id="4">
@@ -68,6 +73,7 @@ http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
       <data key="collect_logs">False</data>
       <data key="ln">lnd</data>
       <data key="ln_cb_image">carlakirkcohen/circuitbreaker:endorsement-experiment</data>
+	  <data key="ln_cb_data">/Users/carla/Work/attackathon/data/ln_10_data.csv</data>
       <data key="ln_config">--protocol.wumbo-channels</data>
     </node>
     <node id="5">
@@ -79,6 +85,7 @@ http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
       <data key="collect_logs">False</data>
       <data key="ln">lnd</data>
       <data key="ln_cb_image">carlakirkcohen/circuitbreaker:endorsement-experiment</data>
+	  <data key="ln_cb_data">/Users/carla/Work/attackathon/data/ln_10_data.csv</data>
       <data key="ln_config">--protocol.wumbo-channels</data>
     </node>
     <node id="6">
@@ -90,6 +97,7 @@ http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
       <data key="collect_logs">False</data>
       <data key="ln">lnd</data>
       <data key="ln_cb_image">carlakirkcohen/circuitbreaker:endorsement-experiment</data>
+	  <data key="ln_cb_data">/Users/carla/Work/attackathon/data/ln_10_data.csv</data>
       <data key="ln_config">--protocol.wumbo-channels</data>
     </node>
     <node id="7">
@@ -101,6 +109,7 @@ http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
       <data key="collect_logs">False</data>
       <data key="ln">lnd</data>
       <data key="ln_cb_image">carlakirkcohen/circuitbreaker:endorsement-experiment</data>
+	  <data key="ln_cb_data">/Users/carla/Work/attackathon/data/ln_10_data.csv</data>
       <data key="ln_config">--protocol.wumbo-channels</data>
     </node>
     <node id="8">
@@ -112,6 +121,7 @@ http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
       <data key="collect_logs">False</data>
       <data key="ln">lnd</data>
       <data key="ln_cb_image">carlakirkcohen/circuitbreaker:endorsement-experiment</data>
+	  <data key="ln_cb_data">/Users/carla/Work/attackathon/data/ln_10_data.csv</data>
       <data key="ln_config">--protocol.wumbo-channels</data>
     </node>
     <node id="9">
@@ -123,6 +133,7 @@ http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
       <data key="collect_logs">False</data>
       <data key="ln">lnd</data>
       <data key="ln_cb_image">carlakirkcohen/circuitbreaker:endorsement-experiment</data>
+	  <data key="ln_cb_data">/Users/carla/Work/attackathon/data/ln_10_data.csv</data>
       <data key="ln_config">--protocol.wumbo-channels</data>
     </node>
     <edge source="0" target="1" id="0" />
