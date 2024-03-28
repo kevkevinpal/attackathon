@@ -178,10 +178,10 @@ To progress the timestamps in your generated data such that the latest
 timestamp reported by the simulation is set to the present (and all 
 others are appropriately "fast-forwarded"), use the following command:
 
-`python setup/progress_timestamps.py htlc_forwards.csv`
+`python setup/progress_timestamps.py htlc_forwards.csv data/ln_10_data.csv`
 
-It will output `htlc_forwards_timewarp.csv` which has the updated 
-forwarding data.
+This will write the csv file with the updated timestamps to 
+`data/ln_10_data.csv`.
 
 ### 4. Circuitbreaker Images
 
