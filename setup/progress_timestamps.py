@@ -13,13 +13,9 @@ def progress_timestamps(csv_file: Path, outfile: Path):
     time_difference = get_time_difference(csv_data)
     progress_timestamps_helper(csv_data, time_difference)
 
-    # Write or print updated CSV data
-    if outfile:
-        write_csv_data(csv_data, outfile)
-        print("CSV data updated and written to", outfile.name)
-    else:
-        for line in csv_data:
-            print('\t'.join(line))
+    # Write updated CSV data
+    write_csv_data(csv_data, outfile)
+    print("CSV data updated and written to", outfile)
 
 def find_latest_timestamp(csv_data):
     latest_timestamp = None
@@ -59,8 +55,8 @@ def write_csv_data(csv_data, outfile):
             f.write(','.join(line) + '\n')
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python program.py <csv_file>")
+    if len(sys.argv) < 2 or len(sys.argv) > 3:
+        print("Usage: python program.py <csv_file> [<output_file>]")
         sys.exit(1)
 
     csv_file_path = Path(sys.argv[1])
@@ -68,7 +64,9 @@ if __name__ == "__main__":
         print("Error: CSV file not found.")
         sys.exit(1)
 
-    outfile_name = csv_file_path.stem + "_timewarp.csv"
-    outfile_path = Path(outfile_name)
+    if len(sys.argv) == 3:
+        outfile_path = Path(sys.argv[2])
+    else:
+        outfile_path = csv_file_path.stem + "_timewarp.csv"
     
     progress_timestamps(csv_file_path, outfile_path)
