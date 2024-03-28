@@ -6,7 +6,7 @@ def convert_to_sim_network(input_file, output_file):
         data = json.load(f)
 
     nodes = data.get('nodes', [])
-    node_pubkey_index = {node['pub_key']: index for index, node in enumerate(nodes)}
+    node_pubkey_index = {node['id']: index for index, node in enumerate(nodes)}
 
     sim_network = []
 
