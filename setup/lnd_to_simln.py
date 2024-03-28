@@ -78,11 +78,11 @@ def convert_to_sim_network(input_file, output_file):
         json.dump(output_data, f, indent=2)
 
 if __name__ == "__main__":
-    if len(sys.argv) != 2:
-        print("Usage: python script.py input_file")
+    if len(sys.argv) != 3:
+        print("Usage: python script.py input_file output_file")
         sys.exit(1)
 
     input_file = sys.argv[1]
-    output_file = input_file.split('.')[0] + '_simln.json'
+    output_file = sys.argv[2]
 
     convert_to_sim_network(input_file, output_file)
