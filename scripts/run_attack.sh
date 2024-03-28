@@ -16,7 +16,7 @@ source .venv/bin/activate
 echo "Preparing historical data"
 python3 "$current_directory/attackathon/setup/progress_timestamps.py" "$current_directory/attackathon/data/ln_10_raw_data.csv" "$current_directory/attackathon/data/ln_10_data.csv"
 
-echo "Bringing up warnet"
+echo "💣 Bringing up warnet 💣"
 warcli network start "$current_directory/attackathon/data/ln_10.graphml" --force
 
 echo "Opening channels and syncing gossip"
@@ -28,5 +28,5 @@ while warcli scenarios active | grep -q "True"; do
 done
 
 echo "TODO: sim-ln is not currently included"
+echo "TODO: Running attack scenario"
 
-echo "Running attack scenario - TODO"
