@@ -11,8 +11,11 @@ def convert_to_sim_network(input_file, output_file):
     sim_network = []
 
     scid_block = 300
-    
-    for index, edge in enumerate(data['edges']):
+   
+    # Sort edges by channel_id to mimic the output of LND's describegraph.
+    sorted_edges = sorted(data["edges"], key=lambda chan: int(chan['channel_id']))
+
+    for index, edge in enumerate(sorted_edges):
         node_1_policy = edge.get('node1_policy', None)
         node_2_policy = edge.get('node2_policy', None)
 
