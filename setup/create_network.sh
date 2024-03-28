@@ -106,4 +106,4 @@ python3 ./attackathon/setup/progress_timestamps.py "$raw_data" "$processed_data"
 
 echo "Setup complete!"
 
-echo "To run your network use: warcli network start "$warnet_file" --force"
+echo "Check in your data files and tell participants to run with network name: $network_name"

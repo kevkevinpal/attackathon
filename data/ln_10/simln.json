@@ -1,0 +1,472 @@
+{
+  "sim_network": [
+    {
+      "scid": 329853488398336,
+      "capacity_msat": 6669420000,
+      "node_1": {
+        "pubkey": "03c5528c628681aa17ab9e117aa3ee6f06c750dfb17df758ecabcd68f1567ad8c1",
+        "alias": "1",
+        "max_htlc_count": 483,
+        "max_in_flight_msat": 6669420000,
+        "min_htlc_size_msat": 1,
+        "max_htlc_size_msat": 400000000,
+        "cltv_expiry_delta": 144,
+        "base_fee": 1000,
+        "fee_rate_prop": 499
+      },
+      "node_2": {
+        "pubkey": "03864ef025fde8fb587d989186ce6a4a186895ee44a926bfc370e2c366597a3f8f",
+        "alias": "9",
+        "max_htlc_count": 15,
+        "max_in_flight_msat": 6669420000,
+        "min_htlc_size_msat": 1000,
+        "max_htlc_size_msat": 6669420000,
+        "cltv_expiry_delta": 420,
+        "base_fee": 69420,
+        "fee_rate_prop": 2569
+      }
+    },
+    {
+      "scid": 330953000026112,
+      "capacity_msat": 8000000000,
+      "node_1": {
+        "pubkey": "03c5528c628681aa17ab9e117aa3ee6f06c750dfb17df758ecabcd68f1567ad8c1",
+        "alias": "1",
+        "max_htlc_count": 483,
+        "max_in_flight_msat": 8000000000,
+        "min_htlc_size_msat": 10000,
+        "max_htlc_size_msat": 7920000000,
+        "cltv_expiry_delta": 144,
+        "base_fee": 1000,
+        "fee_rate_prop": 0
+      },
+      "node_2": {
+        "pubkey": "02f460ae6d3d3e104f8afe520ae0cff3d94c35c2ba8df66da89f3c8006a265b90a",
+        "alias": "2",
+        "max_htlc_count": 15,
+        "max_in_flight_msat": 8000000000,
+        "min_htlc_size_msat": 1000,
+        "max_htlc_size_msat": 7920000000,
+        "cltv_expiry_delta": 420,
+        "base_fee": 9999000,
+        "fee_rate_prop": 969
+      }
+    },
+    {
+      "scid": 332052511653888,
+      "capacity_msat": 10169420000,
+      "node_1": {
+        "pubkey": "03c5528c628681aa17ab9e117aa3ee6f06c750dfb17df758ecabcd68f1567ad8c1",
+        "alias": "1",
+        "max_htlc_count": 483,
+        "max_in_flight_msat": 10169420000,
+        "min_htlc_size_msat": 1000,
+        "max_htlc_size_msat": 10067726000,
+        "cltv_expiry_delta": 100,
+        "base_fee": 500,
+        "fee_rate_prop": 0
+      },
+      "node_2": {
+        "pubkey": "037659a0ac8eb3b8d0a720114efc861d3a940382dcfa1403746b4f8f6b2e8810ba",
+        "alias": "8",
+        "max_htlc_count": 15,
+        "max_in_flight_msat": 10169420000,
+        "min_htlc_size_msat": 1000,
+        "max_htlc_size_msat": 10067726000,
+        "cltv_expiry_delta": 420,
+        "base_fee": 9999000,
+        "fee_rate_prop": 969
+      }
+    },
+    {
+      "scid": 333152023281664,
+      "capacity_msat": 12540428000,
+      "node_1": {
+        "pubkey": "033878501f9a4ce97dba9a6bba4e540eca46cb129a322eb98ea1749ed18ab67735",
+        "alias": "6",
+        "max_htlc_count": 483,
+        "max_in_flight_msat": 12540428000,
+        "min_htlc_size_msat": 1000,
+        "max_htlc_size_msat": 12415024000,
+        "cltv_expiry_delta": 144,
+        "base_fee": 0,
+        "fee_rate_prop": 390
+      },
+      "node_2": {
+        "pubkey": "037659a0ac8eb3b8d0a720114efc861d3a940382dcfa1403746b4f8f6b2e8810ba",
+        "alias": "8",
+        "max_htlc_count": 15,
+        "max_in_flight_msat": 12540428000,
+        "min_htlc_size_msat": 1000,
+        "max_htlc_size_msat": 12415024000,
+        "cltv_expiry_delta": 100,
+        "base_fee": 500,
+        "fee_rate_prop": 0
+      }
+    },
+    {
+      "scid": 334251534909440,
+      "capacity_msat": 5000000000,
+      "node_1": {
+        "pubkey": "02f460ae6d3d3e104f8afe520ae0cff3d94c35c2ba8df66da89f3c8006a265b90a",
+        "alias": "2",
+        "max_htlc_count": 483,
+        "max_in_flight_msat": 5000000000,
+        "min_htlc_size_msat": 2500000,
+        "max_htlc_size_msat": 67108864,
+        "cltv_expiry_delta": 144,
+        "base_fee": 0,
+        "fee_rate_prop": 250
+      },
+      "node_2": {
+        "pubkey": "02826f50035eca93c7ebfbad4f9621a8eb201f4e28f994db5b6b5af32a65efb6b9",
+        "alias": "4",
+        "max_htlc_count": 15,
+        "max_in_flight_msat": 5000000000,
+        "min_htlc_size_msat": 10000,
+        "max_htlc_size_msat": 4950000000,
+        "cltv_expiry_delta": 144,
+        "base_fee": 1000,
+        "fee_rate_prop": 98
+      }
+    },
+    {
+      "scid": 335351046537216,
+      "capacity_msat": 5500000000,
+      "node_1": {
+        "pubkey": "02826f50035eca93c7ebfbad4f9621a8eb201f4e28f994db5b6b5af32a65efb6b9",
+        "alias": "4",
+        "max_htlc_count": 483,
+        "max_in_flight_msat": 5500000000,
+        "min_htlc_size_msat": 2500000,
+        "max_htlc_size_msat": 2147483648,
+        "cltv_expiry_delta": 144,
+        "base_fee": 0,
+        "fee_rate_prop": 1200
+      },
+      "node_2": {
+        "pubkey": "037659a0ac8eb3b8d0a720114efc861d3a940382dcfa1403746b4f8f6b2e8810ba",
+        "alias": "8",
+        "max_htlc_count": 15,
+        "max_in_flight_msat": 5500000000,
+        "min_htlc_size_msat": 1000,
+        "max_htlc_size_msat": 5445000000,
+        "cltv_expiry_delta": 100,
+        "base_fee": 1000,
+        "fee_rate_prop": 3
+      }
+    },
+    {
+      "scid": 336450558164992,
+      "capacity_msat": 33000000000,
+      "node_1": {
+        "pubkey": "02f460ae6d3d3e104f8afe520ae0cff3d94c35c2ba8df66da89f3c8006a265b90a",
+        "alias": "2",
+        "max_htlc_count": 483,
+        "max_in_flight_msat": 33000000000,
+        "min_htlc_size_msat": 10000,
+        "max_htlc_size_msat": 32670000000,
+        "cltv_expiry_delta": 144,
+        "base_fee": 1000,
+        "fee_rate_prop": 848
+      },
+      "node_2": {
+        "pubkey": "037659a0ac8eb3b8d0a720114efc861d3a940382dcfa1403746b4f8f6b2e8810ba",
+        "alias": "8",
+        "max_htlc_count": 15,
+        "max_in_flight_msat": 33000000000,
+        "min_htlc_size_msat": 1000,
+        "max_htlc_size_msat": 32670000000,
+        "cltv_expiry_delta": 100,
+        "base_fee": 1000,
+        "fee_rate_prop": 66
+      }
+    },
+    {
+      "scid": 337550069792768,
+      "capacity_msat": 4000000000,
+      "node_1": {
+        "pubkey": "02a81f90ae5574dc84bc3ae2db50ff995f32c02a90f64ed1b5c5d74e91bbe72d0f",
+        "alias": "5",
+        "max_htlc_count": 483,
+        "max_in_flight_msat": 4000000000,
+        "min_htlc_size_msat": 1000,
+        "max_htlc_size_msat": 3960000000,
+        "cltv_expiry_delta": 100,
+        "base_fee": 0,
+        "fee_rate_prop": 163
+      },
+      "node_2": {
+        "pubkey": "037659a0ac8eb3b8d0a720114efc861d3a940382dcfa1403746b4f8f6b2e8810ba",
+        "alias": "8",
+        "max_htlc_count": 15,
+        "max_in_flight_msat": 4000000000,
+        "min_htlc_size_msat": 1000,
+        "max_htlc_size_msat": 3960000000,
+        "cltv_expiry_delta": 100,
+        "base_fee": 1000,
+        "fee_rate_prop": 0
+      }
+    },
+    {
+      "scid": 338649581420544,
+      "capacity_msat": 21069420000,
+      "node_1": {
+        "pubkey": "03c5528c628681aa17ab9e117aa3ee6f06c750dfb17df758ecabcd68f1567ad8c1",
+        "alias": "1",
+        "max_htlc_count": 483,
+        "max_in_flight_msat": 21069420000,
+        "min_htlc_size_msat": 1000,
+        "max_htlc_size_msat": 20858726000,
+        "cltv_expiry_delta": 100,
+        "base_fee": 0,
+        "fee_rate_prop": 3
+      },
+      "node_2": {
+        "pubkey": "02a81f90ae5574dc84bc3ae2db50ff995f32c02a90f64ed1b5c5d74e91bbe72d0f",
+        "alias": "5",
+        "max_htlc_count": 15,
+        "max_in_flight_msat": 21069420000,
+        "min_htlc_size_msat": 1000,
+        "max_htlc_size_msat": 20858726000,
+        "cltv_expiry_delta": 420,
+        "base_fee": 9999000,
+        "fee_rate_prop": 969
+      }
+    },
+    {
+      "scid": 339749093048320,
+      "capacity_msat": 596696000,
+      "node_1": {
+        "pubkey": "03d8ef4620be554d89902bc9fde9498b67790f416833b84d76298e248e4fccef56",
+        "alias": "3",
+        "max_htlc_count": 483,
+        "max_in_flight_msat": 596696000,
+        "min_htlc_size_msat": 1,
+        "max_htlc_size_msat": 268513000,
+        "cltv_expiry_delta": 144,
+        "base_fee": 1000,
+        "fee_rate_prop": 499
+      },
+      "node_2": {
+        "pubkey": "03864ef025fde8fb587d989186ce6a4a186895ee44a926bfc370e2c366597a3f8f",
+        "alias": "9",
+        "max_htlc_count": 15,
+        "max_in_flight_msat": 596696000,
+        "min_htlc_size_msat": 1000,
+        "max_htlc_size_msat": 268513000,
+        "cltv_expiry_delta": 80,
+        "base_fee": 1000,
+        "fee_rate_prop": 1
+      }
+    },
+    {
+      "scid": 340848604676096,
+      "capacity_msat": 5000000000,
+      "node_1": {
+        "pubkey": "03d8ef4620be554d89902bc9fde9498b67790f416833b84d76298e248e4fccef56",
+        "alias": "3",
+        "max_htlc_count": 483,
+        "max_in_flight_msat": 5000000000,
+        "min_htlc_size_msat": 1000,
+        "max_htlc_size_msat": 4950000000,
+        "cltv_expiry_delta": 144,
+        "base_fee": 0,
+        "fee_rate_prop": 20
+      },
+      "node_2": {
+        "pubkey": "033878501f9a4ce97dba9a6bba4e540eca46cb129a322eb98ea1749ed18ab67735",
+        "alias": "6",
+        "max_htlc_count": 15,
+        "max_in_flight_msat": 5000000000,
+        "min_htlc_size_msat": 1000,
+        "max_htlc_size_msat": 4950000000,
+        "cltv_expiry_delta": 80,
+        "base_fee": 1000,
+        "fee_rate_prop": 1
+      }
+    },
+    {
+      "scid": 341948116303872,
+      "capacity_msat": 10000000000,
+      "node_1": {
+        "pubkey": "02826f50035eca93c7ebfbad4f9621a8eb201f4e28f994db5b6b5af32a65efb6b9",
+        "alias": "4",
+        "max_htlc_count": 483,
+        "max_in_flight_msat": 10000000000,
+        "min_htlc_size_msat": 2500000,
+        "max_htlc_size_msat": 4294967296,
+        "cltv_expiry_delta": 144,
+        "base_fee": 0,
+        "fee_rate_prop": 1200
+      },
+      "node_2": {
+        "pubkey": "03864ef025fde8fb587d989186ce6a4a186895ee44a926bfc370e2c366597a3f8f",
+        "alias": "9",
+        "max_htlc_count": 15,
+        "max_in_flight_msat": 10000000000,
+        "min_htlc_size_msat": 1,
+        "max_htlc_size_msat": 4500000000,
+        "cltv_expiry_delta": 144,
+        "base_fee": 1000,
+        "fee_rate_prop": 499
+      }
+    },
+    {
+      "scid": 343047627931648,
+      "capacity_msat": 5000000000,
+      "node_1": {
+        "pubkey": "023631624e30ef7bcb2887e600da8e59608a093718bc40d35b7a57145a0f3db9af",
+        "alias": "0",
+        "max_htlc_count": 483,
+        "max_in_flight_msat": 5000000000,
+        "min_htlc_size_msat": 1,
+        "max_htlc_size_msat": 2048000000,
+        "cltv_expiry_delta": 144,
+        "base_fee": 1,
+        "fee_rate_prop": 2
+      },
+      "node_2": {
+        "pubkey": "02826f50035eca93c7ebfbad4f9621a8eb201f4e28f994db5b6b5af32a65efb6b9",
+        "alias": "4",
+        "max_htlc_count": 15,
+        "max_in_flight_msat": 5000000000,
+        "min_htlc_size_msat": 2500000,
+        "max_htlc_size_msat": 33554432,
+        "cltv_expiry_delta": 144,
+        "base_fee": 0,
+        "fee_rate_prop": 50
+      }
+    },
+    {
+      "scid": 344147139559424,
+      "capacity_msat": 5000000000,
+      "node_1": {
+        "pubkey": "03f4553a2e6092fb7c03e7c4041451d9946e7326f6bf2c852278dacbaff798a4b3",
+        "alias": "7",
+        "max_htlc_count": 483,
+        "max_in_flight_msat": 5000000000,
+        "min_htlc_size_msat": 1,
+        "max_htlc_size_msat": 10000000,
+        "cltv_expiry_delta": 144,
+        "base_fee": 1000,
+        "fee_rate_prop": 499
+      },
+      "node_2": {
+        "pubkey": "03864ef025fde8fb587d989186ce6a4a186895ee44a926bfc370e2c366597a3f8f",
+        "alias": "9",
+        "max_htlc_count": 15,
+        "max_in_flight_msat": 5000000000,
+        "min_htlc_size_msat": 1000,
+        "max_htlc_size_msat": 2250000000,
+        "cltv_expiry_delta": 80,
+        "base_fee": 1000,
+        "fee_rate_prop": 1
+      }
+    },
+    {
+      "scid": 345246651187200,
+      "capacity_msat": 100000000000,
+      "node_1": {
+        "pubkey": "037659a0ac8eb3b8d0a720114efc861d3a940382dcfa1403746b4f8f6b2e8810ba",
+        "alias": "8",
+        "max_htlc_count": 483,
+        "max_in_flight_msat": 100000000000,
+        "min_htlc_size_msat": 1000,
+        "max_htlc_size_msat": 20000000000,
+        "cltv_expiry_delta": 100,
+        "base_fee": 616,
+        "fee_rate_prop": 281
+      },
+      "node_2": {
+        "pubkey": "03864ef025fde8fb587d989186ce6a4a186895ee44a926bfc370e2c366597a3f8f",
+        "alias": "9",
+        "max_htlc_count": 15,
+        "max_in_flight_msat": 100000000000,
+        "min_htlc_size_msat": 1,
+        "max_htlc_size_msat": 20000000000,
+        "cltv_expiry_delta": 144,
+        "base_fee": 1000,
+        "fee_rate_prop": 999
+      }
+    },
+    {
+      "scid": 346346162814976,
+      "capacity_msat": 2069420000,
+      "node_1": {
+        "pubkey": "03c5528c628681aa17ab9e117aa3ee6f06c750dfb17df758ecabcd68f1567ad8c1",
+        "alias": "1",
+        "max_htlc_count": 483,
+        "max_in_flight_msat": 2069420000,
+        "min_htlc_size_msat": 1000,
+        "max_htlc_size_msat": 2048726000,
+        "cltv_expiry_delta": 420,
+        "base_fee": 9999000,
+        "fee_rate_prop": 969
+      },
+      "node_2": {
+        "pubkey": "03f4553a2e6092fb7c03e7c4041451d9946e7326f6bf2c852278dacbaff798a4b3",
+        "alias": "7",
+        "max_htlc_count": 15,
+        "max_in_flight_msat": 2069420000,
+        "min_htlc_size_msat": 1000,
+        "max_htlc_size_msat": 2048726000,
+        "cltv_expiry_delta": 80,
+        "base_fee": 1000,
+        "fee_rate_prop": 1
+      }
+    },
+    {
+      "scid": 347445674442752,
+      "capacity_msat": 1000000000,
+      "node_1": {
+        "pubkey": "03f4553a2e6092fb7c03e7c4041451d9946e7326f6bf2c852278dacbaff798a4b3",
+        "alias": "7",
+        "max_htlc_count": 483,
+        "max_in_flight_msat": 1000000000,
+        "min_htlc_size_msat": 1000,
+        "max_htlc_size_msat": 990000000,
+        "cltv_expiry_delta": 100,
+        "base_fee": 1000,
+        "fee_rate_prop": 299
+      },
+      "node_2": {
+        "pubkey": "037659a0ac8eb3b8d0a720114efc861d3a940382dcfa1403746b4f8f6b2e8810ba",
+        "alias": "8",
+        "max_htlc_count": 15,
+        "max_in_flight_msat": 1000000000,
+        "min_htlc_size_msat": 1000,
+        "max_htlc_size_msat": 990000000,
+        "cltv_expiry_delta": 80,
+        "base_fee": 1000,
+        "fee_rate_prop": 1
+      }
+    },
+    {
+      "scid": 348545186070528,
+      "capacity_msat": 2000000000,
+      "node_1": {
+        "pubkey": "023631624e30ef7bcb2887e600da8e59608a093718bc40d35b7a57145a0f3db9af",
+        "alias": "0",
+        "max_htlc_count": 483,
+        "max_in_flight_msat": 2000000000,
+        "min_htlc_size_msat": 1,
+        "max_htlc_size_msat": 1024000000,
+        "cltv_expiry_delta": 144,
+        "base_fee": 1,
+        "fee_rate_prop": 422
+      },
+      "node_2": {
+        "pubkey": "03f4553a2e6092fb7c03e7c4041451d9946e7326f6bf2c852278dacbaff798a4b3",
+        "alias": "7",
+        "max_htlc_count": 15,
+        "max_in_flight_msat": 2000000000,
+        "min_htlc_size_msat": 1000,
+        "max_htlc_size_msat": 1980000000,
+        "cltv_expiry_delta": 80,
+        "base_fee": 1000,
+        "fee_rate_prop": 1
+      }
+    }
+  ]
+}
