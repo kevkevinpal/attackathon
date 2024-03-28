@@ -13,6 +13,9 @@ cd warnet
 python3 -m venv .venv
 source .venv/bin/activate
 
+echo "Preparing historical data"
+python3 "$current_directory/attackathon/setup/progress_timestamps.py" "$current_directory/attackathon/data/ln_10_raw_data.csv" "$current_directory/attackathon/data/ln_10_data.csv"
+
 echo "Bringing up warnet"
 warcli network start "$current_directory/attackathon/data/ln_10.graphml" --force
 
