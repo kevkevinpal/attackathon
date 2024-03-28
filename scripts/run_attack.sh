@@ -1,26 +1,36 @@
 #!/bin/bash
 
+# Check if the 'warnet' directory exists
 if [ ! -d "warnet" ]; then
     echo "Error: Warnet directory not found. Make sure to clone Warnet before running this script."
     exit 1
 fi
 
-# Capture current working directory, which has the attackathon files in it.
+# Check if the correct number of arguments are provided
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <network_name>"
+    exit 1
+fi
+
+network_name="$1"
+
+# Capture the current working directory, which has the attackathon files in it
 current_directory=$(pwd)
+sim_files="$current_directory/attackathon/data/$network_name"
 
-cd warnet
+cd warnet || exit 1
 
-python3 -m venv .venv
-source .venv/bin/activate
+# Activate the virtual environment
+source .venv/bin/activate || exit 1
 
 echo "Preparing historical data"
-python3 "$current_directory/attackathon/setup/progress_timestamps.py" "$current_directory/attackathon/data/ln_10_raw_data.csv" "$current_directory/attackathon/data/ln_10_data.csv"
+python3 "$current_directory/attackathon/setup/progress_timestamps.py" "$sim_files/raw_data.csv" "$sim_files/data.csv"
 
 echo "💣 Bringing up warnet 💣"
-warcli network start "$current_directory/attackathon/data/ln_10.graphml" --force
+warcli network start "$sim_files/$network_name.graphml" --force
 
 echo "Opening channels and syncing gossip"
-warcli scenarios run ln_init 
+warcli scenarios run ln_init
 
 echo "Waiting for gossip to sync"
 while warcli scenarios active | grep -q "True"; do
@@ -29,4 +39,3 @@ done
 
 echo "TODO: sim-ln is not currently included"
 echo "TODO: Running attack scenario"
-

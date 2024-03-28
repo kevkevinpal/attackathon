@@ -37,11 +37,15 @@ if [ ! -f "$json_file" ]; then
     exit 1
 fi
 
-file_name=$(basename "$json_file" .json)
-echo "Setting up network for $file_name"
+network_name=$(basename "$json_file" .json)
+echo "Setting up network for $network_name"
+
+sim_files="$current_directory"/attackathon/data/"$network_name"
+echo "Creating simulation files in: "$sim_files""
+mkdir -p $sim_files
 
 echo "Generating sim-ln file for historical payment generation"
-simfile="$current_directory/attackathon/data/"$file_name"_simln.json"
+simfile="$sim_files"/simln.json
 python3 attackathon/setup/lnd_to_simln.py "$json_file" "$simfile"
 cd sim-ln
 
@@ -68,12 +72,12 @@ echo "Generating historical data for $duration seconds, this might take a while!
 sim-cli -l debug -c 10 -s "$simfile" -t "$duration"
 
 # Copy the raw sim-ln data from its output folder to our attackathon data dir. 
-raw_data="$current_directory"/attackathon/data/"$file_name"_raw_data.csv
+raw_data="$sim_files"/raw_data.csv
 cp results/htlc_forwards.csv "$raw_data"
 cd ..
 
 # Set the location where we'll output our progressed timestamp output.
-processed_data="$current_directory"/attackathon/data/"$file_name"_data.csv
+processed_data="$sim_files"/data.csv
 
 # Before we actually bump our timestamps, we'll spin up warnet to generate a graphml file that
 # will use our generated data.
@@ -87,7 +91,7 @@ pip install -e . > /dev/null 2>&1
 warnet &
 warnet_pid=$!
 
-warnet_file="$current_directory"/attackathon/data/"$file_name".graphml
+warnet_file="$sim_files"/"$network_name".graphml
 warcli graph import-json "$json_file" --cb_data="$processed_data" --outfile="$warnet_file" > /dev/null 2>&1 
 
 # Shut warnet down

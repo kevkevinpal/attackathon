@@ -77,6 +77,7 @@ repository to be in the current directory.
 * Warnet cli: [./attackathon/scripts/run_attack.sh](/.scripts/start_network.sh)
   brings up your lightning network, opens channels and simulates 
   random payments in the network and runs your attack.
+  `./attackathon/scripts/run_attack.sh ln_10`
 
 ## Assessment
 
