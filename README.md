@@ -183,20 +183,13 @@ others are appropriately "fast-forwarded"), use the following command:
 This will write the csv file with the updated timestamps to 
 `data/ln_10_data.csv`.
 
-### 4. Circuitbreaker Images
+Note that you'll want to do this step every time for fresh data!
 
-For the first iteration of the attackathon, the `htlc_forwards.csv` 
-file is *built into the circuitbreaker image* for bootstrapping. This 
-means that you *must rebuild* the image each time you want to update 
-the network/payment activity. 
+### 4. Create Warnet Topology
 
-To build the container:
-
-TODO
-
-### 5. Run warnet
-
-1. Install Warnet
+Once you've generated data for your network, and progressed your 
+timestamps to the present, you'll want to create a warnet graphml 
+file that specifies your topology.
 
 `git clone https://github.com/bitcoin-dev-project/warnet`
 `git checkout XYZ` <- we'll have a hackathon branch w/ stuff?
@@ -211,31 +204,29 @@ pip install -e .
 If you run into problems, check the [installation instructions](https://github.com/bitcoin-dev-project/warnet/blob/main/docs/install.md)
 as this doc may be outdated!
 
-2. Start your warnet
-
 Warnet operates with a server and a cli, so you'll need to start the 
 server: 
 `warnet`
 
-And then use `warcli` to bring up your network: 
-`warcli network up test/data/attackathon_100.graphml`
+Once you've started the server, you can use its cli to generate a 
+graph file for the graph you've chosen and the data you've prepared:
 
-3. Setup lightning channels
+`warcli network import-json {graph.json} --cb_data={ln_10_data.csv} --outfile={dest}`
 
-To setup your network, run the channel setup "scenario":
+### 5. Run warnet
+
+Finally, you can use the file generated in the previous step to bring 
+up your warnet:
+`warcli network up {dest} --force`
+
+Next, to setup the lightning channels in your network:
 `warcli scenario run ln_init'
 
 This may take a while, because it opens up one channel per block and 
 waits for gossip to be fully synced. You *must* wait for this to 
 complete before proceeding to the next step!
 
-4. Setup sim-ln
-
-While you're attempting to attack warnet, the other nodes in the 
-network will be randomly sending payments amongst themselves to mimic 
-an active network. You'll need to setup sim-ln, provide it with access 
-to your wanet's credentials and run it.
-
+TODO: removeme once sim-ln is natively added!
 `git clone https://github.com/bitcoin-dev-project/sim-ln`
 `cargo install --locked --path sim-cli`
 
