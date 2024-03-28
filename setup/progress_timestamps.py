@@ -14,7 +14,7 @@ def progress_timestamps(csv_file: Path, outfile: Path):
     progress_timestamps_helper(csv_data, time_difference)
 
     # Write updated CSV data
-    write_csv_data(csv_data, outfile)
+    write_csv_data(headers, csv_data, outfile)
     print("CSV data updated and written to", outfile)
 
 def find_latest_timestamp(csv_data):
@@ -49,8 +49,9 @@ def get_time_difference(csv_data):
     time_difference = current_time - latest_timestamp
     return time_difference
 
-def write_csv_data(csv_data, outfile):
+def write_csv_data(headers, csv_data, outfile):
     with open(outfile, 'w') as f:
+        f.write(','.join(headers) + '\n')  # Write headers
         for line in csv_data:
             f.write(','.join(line) + '\n')
 
