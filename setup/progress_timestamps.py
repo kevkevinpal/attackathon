@@ -1,4 +1,5 @@
 import sys
+import time
 from datetime import datetime
 from pathlib import Path
 
@@ -29,13 +30,13 @@ def find_latest_timestamp(csv_data):
 
 def progress_timestamps_helper(csv_data, time_difference):
     timestamp_indices = [2, 3, 6, 7]  # Indices of timestamp fields
-    current_time = int(datetime.now().timestamp())
+    current_time_ns = int(time.time() * 1e9)
 
     for line in csv_data:
         for index in timestamp_indices:
             timestamp = int(line[index])
             updated_timestamp = timestamp + time_difference
-            updated_timestamp = max(updated_timestamp, current_time)
+            updated_timestamp = max(updated_timestamp, current_time_ns)
             line[index] = str(updated_timestamp)
 
 def get_time_difference(csv_data):
@@ -45,8 +46,8 @@ def get_time_difference(csv_data):
         exit(1)
 
     # Calculate time difference
-    current_time = int(datetime.now().timestamp())
-    time_difference = current_time - latest_timestamp
+    current_time_ns = int(time.time() * 1e9)
+    time_difference = current_time_ns - latest_timestamp
     return time_difference
 
 def write_csv_data(headers, csv_data, outfile):
