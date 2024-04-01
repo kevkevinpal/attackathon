@@ -10,7 +10,28 @@ against a test lightning network. You will be required to write a
 program that performs a jamming attack against a node in the test 
 network. 
 
-Your goal is to **completely jam all of the node's channels for an hour.**
+Your goal is to **completely jam a routing node for an hour.**
+
+Given that we are operating within the context of a reputation system, 
+we extend our definition of a node being "jammed" to consider the 
+possibility that the attack may try to use the reputation system 
+_itself_ to disrupt quality of service. We define the severity of a 
+jamming attack as follows:
+
+*Weak*: All of its **outgoing general** slots and liquidity are occupied.
+
+-> Endorsed htlcs from high reputation peers can still be forwarded.
+
+-> Unendorsed htlcs cannot be forwarded (from any peer).
+
+*Strong*: All of its **outgoing** slots and liquidity are occupied
+OR all of its peers have **low reputation** AND all of its 
+**outgoing general** slots and liquidity are occupied.
+
+-> Endorsed htlcs will not be forwarded (due to lack of resources or 
+  peer reputation)
+
+-> Unendorsed htlcs cannot be forwarded (from any peer).
 
 Your program should: 
 - Accept the public key of the node being attacked as a parameter. 
@@ -82,8 +103,8 @@ repository to be in the current directory.
 ## Assessment
 
 Attacks will be assessed using the following measures:
-- Did the attacker successfully occupy the resources of the targeted 
-  node such that it could not process honest payments?
+- Did the attack achieve a *weak* or *strong* jamming attack, per the 
+  definition provided above.
 - What was the total cost of the attack, considering:
   - On-chain fees: for channel opens and closes, sending funds between 
     nodes on-chain will node be included for simplicity's sake.
@@ -93,6 +114,8 @@ Attacks will be assessed using the following measures:
   - Opportunity cost of capital: for each channel that is opened, 5% 
     p.a. charged on the total capital deployed in the channels, 
     assuming 10 minute blocks.
+- When compared to the operation of the network _without_ a jamming 
+  attack, how many honest htlcs were dropped as a result of the attack?
 
 ### HackNicePlz
 
