@@ -59,7 +59,7 @@ git remote add carla https://github.com/carlaKC/sim-ln
 
 # Silence some of the louder output.
 git fetch carla > /dev/null 2>&1 
-git checkout carla/sim-data > /dev/null 2>&1 
+git checkout carla/attackathon > /dev/null 2>&1 
 
 echo "Installing sim-ln for data generation"
 cargo install --locked --path sim-cli
