@@ -1,0 +1,223 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="target_policy" for="edge" attr.name="target_policy" attr.type="string" />
+  <key id="source_policy" for="edge" attr.name="source_policy" attr.type="string" />
+  <key id="channel_open" for="edge" attr.name="channel_open" attr.type="string" />
+  <key id="image" for="node" attr.name="image" attr.type="string" />
+  <key id="ln_config" for="node" attr.name="ln_config" attr.type="string" />
+  <key id="ln_cb_image" for="node" attr.name="ln_cb_image" attr.type="string" />
+  <key id="ln" for="node" attr.name="ln" attr.type="string" />
+  <key id="collect_logs" for="node" attr.name="collect_logs" attr.type="boolean" />
+  <key id="exporter" for="node" attr.name="exporter" attr.type="boolean" />
+  <key id="build_args" for="node" attr.name="build_args" attr.type="string" />
+  <key id="tc_netem" for="node" attr.name="tc_netem" attr.type="string" />
+  <key id="bitcoin_config" for="node" attr.name="bitcoin_config" attr.type="string" />
+  <key id="version" for="node" attr.name="version" attr.type="string" />
+  <graph edgedefault="directed">
+    <node id="0">
+      <data key="version">26.0</data>
+      <data key="bitcoin_config">-uacomment=tank000000</data>
+      <data key="tc_netem" />
+      <data key="build_args" />
+      <data key="exporter">False</data>
+      <data key="collect_logs">False</data>
+      <data key="ln">lnd</data>
+      <data key="ln_cb_image">pinheadmz/circuitbreaker:278737d</data>
+      <data key="ln_config">--protocol.wumbo-channels</data>
+    </node>
+    <node id="1">
+      <data key="image">bitcoindevproject/bitcoin:26.0</data>
+      <data key="bitcoin_config">-uacomment=tank000001</data>
+      <data key="tc_netem" />
+      <data key="build_args" />
+      <data key="exporter">False</data>
+      <data key="collect_logs">False</data>
+      <data key="ln">lnd</data>
+      <data key="ln_cb_image">pinheadmz/circuitbreaker:278737d</data>
+      <data key="ln_config">--protocol.wumbo-channels</data>
+    </node>
+    <node id="2">
+      <data key="version">26.0</data>
+      <data key="bitcoin_config">-uacomment=tank000002</data>
+      <data key="tc_netem" />
+      <data key="build_args" />
+      <data key="exporter">False</data>
+      <data key="collect_logs">False</data>
+      <data key="ln">lnd</data>
+      <data key="ln_cb_image">pinheadmz/circuitbreaker:278737d</data>
+      <data key="ln_config">--protocol.wumbo-channels</data>
+    </node>
+    <node id="3">
+      <data key="version">26.0</data>
+      <data key="bitcoin_config">-uacomment=tank000003</data>
+      <data key="tc_netem" />
+      <data key="build_args" />
+      <data key="exporter">False</data>
+      <data key="collect_logs">False</data>
+      <data key="ln">lnd</data>
+      <data key="ln_cb_image">pinheadmz/circuitbreaker:278737d</data>
+      <data key="ln_config">--protocol.wumbo-channels</data>
+    </node>
+    <node id="4">
+      <data key="version">26.0</data>
+      <data key="bitcoin_config">-uacomment=tank000004</data>
+      <data key="tc_netem" />
+      <data key="build_args" />
+      <data key="exporter">False</data>
+      <data key="collect_logs">False</data>
+      <data key="ln">lnd</data>
+      <data key="ln_cb_image">pinheadmz/circuitbreaker:278737d</data>
+      <data key="ln_config">--protocol.wumbo-channels</data>
+    </node>
+    <node id="5">
+      <data key="version">26.0</data>
+      <data key="bitcoin_config">-uacomment=tank000005</data>
+      <data key="tc_netem" />
+      <data key="build_args" />
+      <data key="exporter">False</data>
+      <data key="collect_logs">False</data>
+      <data key="ln">lnd</data>
+      <data key="ln_cb_image">pinheadmz/circuitbreaker:278737d</data>
+      <data key="ln_config">--protocol.wumbo-channels</data>
+    </node>
+    <node id="6">
+      <data key="version">26.0</data>
+      <data key="bitcoin_config">-uacomment=tank000006</data>
+      <data key="tc_netem" />
+      <data key="build_args" />
+      <data key="exporter">False</data>
+      <data key="collect_logs">False</data>
+      <data key="ln">lnd</data>
+      <data key="ln_cb_image">pinheadmz/circuitbreaker:278737d</data>
+      <data key="ln_config">--protocol.wumbo-channels</data>
+    </node>
+    <node id="7">
+      <data key="version">26.0</data>
+      <data key="bitcoin_config">-uacomment=tank000007</data>
+      <data key="tc_netem" />
+      <data key="build_args" />
+      <data key="exporter">False</data>
+      <data key="collect_logs">False</data>
+      <data key="ln">lnd</data>
+      <data key="ln_cb_image">pinheadmz/circuitbreaker:278737d</data>
+      <data key="ln_config">--protocol.wumbo-channels</data>
+    </node>
+    <node id="8">
+      <data key="version">26.0</data>
+      <data key="bitcoin_config">-uacomment=tank000008</data>
+      <data key="tc_netem" />
+      <data key="build_args" />
+      <data key="exporter">False</data>
+      <data key="collect_logs">False</data>
+      <data key="ln">lnd</data>
+      <data key="ln_cb_image">pinheadmz/circuitbreaker:278737d</data>
+      <data key="ln_config">--protocol.wumbo-channels</data>
+    </node>
+    <node id="9">
+      <data key="version">26.0</data>
+      <data key="bitcoin_config">-uacomment=tank000009</data>
+      <data key="tc_netem" />
+      <data key="build_args" />
+      <data key="exporter">False</data>
+      <data key="collect_logs">False</data>
+      <data key="ln">lnd</data>
+      <data key="ln_cb_image">pinheadmz/circuitbreaker:278737d</data>
+      <data key="ln_config">--protocol.wumbo-channels</data>
+    </node>
+    <edge source="0" target="1" id="0" />
+    <edge source="0" target="5" id="0" />
+    <edge source="0" target="8" id="0" />
+    <edge source="0" target="8" id="46">
+      <data key="channel_open">--local_amt=998774 --push_amt=499387</data>
+      <data key="source_policy"> --base_fee_msat=9998 --fee_rate_ppm=600 --time_lock_delta=40 --min_htlc_msat=1000 --max_htlc_msat=499387000</data>
+      <data key="target_policy"> --base_fee_msat=1000 --fee_rate_ppm=100 --time_lock_delta=40 --min_htlc_msat=1000 --max_htlc_msat=499387000</data>
+    </edge>
+    <edge source="0" target="3" id="0" />
+    <edge source="0" target="7" id="0" />
+    <edge source="0" target="2" id="0" />
+    <edge source="0" target="2" id="50">
+      <data key="channel_open">--local_amt=80000 --push_amt=40000</data>
+      <data key="source_policy"> --base_fee_msat=1000 --fee_rate_ppm=1 --time_lock_delta=80 --min_htlc_msat=1000 --max_htlc_msat=40000000</data>
+      <data key="target_policy"> --base_fee_msat=50000 --fee_rate_ppm=1 --time_lock_delta=40 --min_htlc_msat=1000 --max_htlc_msat=40000000</data>
+    </edge>
+    <edge source="0" target="6" id="0" />
+    <edge source="0" target="6" id="48">
+      <data key="channel_open">--local_amt=20000 --push_amt=10000</data>
+      <data key="source_policy"> --base_fee_msat=30 --fee_rate_ppm=70 --time_lock_delta=40 --min_htlc_msat=1000 --max_htlc_msat=10000000</data>
+      <data key="target_policy"> --base_fee_msat=1000 --fee_rate_ppm=1 --time_lock_delta=40 --min_htlc_msat=1000 --max_htlc_msat=10000000</data>
+    </edge>
+    <edge source="0" target="4" id="0" />
+    <edge source="0" target="9" id="45">
+      <data key="channel_open">--local_amt=16777215 --push_amt=8388607</data>
+      <data key="source_policy"> --base_fee_msat=9998 --fee_rate_ppm=600 --time_lock_delta=40 --min_htlc_msat=1000 --max_htlc_msat=8388607000</data>
+      <data key="target_policy"> --base_fee_msat=1000 --fee_rate_ppm=499 --time_lock_delta=144 --min_htlc_msat=1 --max_htlc_msat=8388607000</data>
+    </edge>
+    <edge source="1" target="2" id="0" />
+    <edge source="1" target="7" id="0" />
+    <edge source="1" target="9" id="0" />
+    <edge source="1" target="5" id="0" />
+    <edge source="1" target="6" id="0" />
+    <edge source="1" target="3" id="0" />
+    <edge source="1" target="3" id="52">
+      <data key="channel_open">--local_amt=300000 --push_amt=150000</data>
+      <data key="source_policy"> --base_fee_msat=1000 --fee_rate_ppm=1 --time_lock_delta=40 --min_htlc_msat=1000 --max_htlc_msat=150000000</data>
+      <data key="target_policy"> --base_fee_msat=1000 --fee_rate_ppm=1 --time_lock_delta=40 --min_htlc_msat=1000 --max_htlc_msat=150000000</data>
+    </edge>
+    <edge source="1" target="8" id="0" />
+    <edge source="1" target="4" id="0" />
+    <edge source="2" target="3" id="0" />
+    <edge source="2" target="7" id="0" />
+    <edge source="2" target="9" id="0" />
+    <edge source="2" target="8" id="0" />
+    <edge source="2" target="5" id="0" />
+    <edge source="2" target="4" id="0" />
+    <edge source="2" target="4" id="51">
+      <data key="channel_open">--local_amt=300000 --push_amt=150000</data>
+      <data key="source_policy"> --base_fee_msat=500 --fee_rate_ppm=50 --time_lock_delta=80 --min_htlc_msat=1000 --max_htlc_msat=150000000</data>
+      <data key="target_policy"> --base_fee_msat=0 --fee_rate_ppm=1 --time_lock_delta=40 --min_htlc_msat=1000 --max_htlc_msat=150000000</data>
+    </edge>
+    <edge source="2" target="6" id="0" />
+    <edge source="3" target="4" id="0" />
+    <edge source="3" target="6" id="0" />
+    <edge source="3" target="5" id="0" />
+    <edge source="3" target="5" id="54">
+      <data key="channel_open">--local_amt=300000 --push_amt=150000</data>
+      <data key="source_policy"> --base_fee_msat=1000 --fee_rate_ppm=1 --time_lock_delta=40 --min_htlc_msat=1000 --max_htlc_msat=150000000</data>
+      <data key="target_policy"> --base_fee_msat=1000 --fee_rate_ppm=1 --time_lock_delta=40 --min_htlc_msat=1000 --max_htlc_msat=150000000</data>
+    </edge>
+    <edge source="3" target="8" id="0" />
+    <edge source="3" target="8" id="47">
+      <data key="channel_open">--local_amt=999300 --push_amt=499650</data>
+      <data key="source_policy"> --base_fee_msat=1000 --fee_rate_ppm=1000 --time_lock_delta=40 --min_htlc_msat=1000 --max_htlc_msat=499650000</data>
+      <data key="target_policy"> --base_fee_msat=0 --fee_rate_ppm=0 --time_lock_delta=40 --min_htlc_msat=1000 --max_htlc_msat=499650000</data>
+    </edge>
+    <edge source="3" target="7" id="0" />
+    <edge source="3" target="7" id="53">
+      <data key="channel_open">--local_amt=30000 --push_amt=15000</data>
+      <data key="source_policy"> --base_fee_msat=1000 --fee_rate_ppm=1 --time_lock_delta=40 --min_htlc_msat=1000 --max_htlc_msat=15000000</data>
+      <data key="target_policy"> --base_fee_msat=1000 --fee_rate_ppm=1 --time_lock_delta=40 --min_htlc_msat=1000 --max_htlc_msat=15000000</data>
+    </edge>
+    <edge source="3" target="9" id="0" />
+    <edge source="4" target="5" id="0" />
+    <edge source="4" target="7" id="0" />
+    <edge source="4" target="9" id="0" />
+    <edge source="4" target="9" id="49">
+      <data key="channel_open">--local_amt=401000 --push_amt=200500</data>
+      <data key="source_policy"> --base_fee_msat=0 --fee_rate_ppm=1 --time_lock_delta=40 --min_htlc_msat=1000 --max_htlc_msat=200500000</data>
+      <data key="target_policy"> --base_fee_msat=1000 --fee_rate_ppm=499 --time_lock_delta=144 --min_htlc_msat=1 --max_htlc_msat=200500000</data>
+    </edge>
+    <edge source="4" target="6" id="0" />
+    <edge source="4" target="8" id="0" />
+    <edge source="5" target="6" id="0" />
+    <edge source="5" target="8" id="0" />
+    <edge source="5" target="9" id="0" />
+    <edge source="5" target="7" id="0" />
+    <edge source="6" target="7" id="0" />
+    <edge source="6" target="8" id="0" />
+    <edge source="6" target="9" id="0" />
+    <edge source="7" target="8" id="0" />
+    <edge source="7" target="9" id="0" />
+    <edge source="8" target="9" id="0" />
+    <edge source="9" target="0" id="0" />
+  </graph>
+</graphml>
