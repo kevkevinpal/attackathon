@@ -119,8 +119,8 @@ repository to be in the current directory.
   * When you're done with it, bring it down with 
     [./attackathon/scripts/stop_warnet.sh](./scripts/stop_warnet.sh)
 * Start network: [./attackathon/scripts/start_network.sh](/.scripts/start_network.sh)
-  brings up your lightning network, opens channels and simulates 
-  random payments in the network and runs your attack.
+  brings up your lightning network, opens channels, simulates 
+  random payments in the network and mines blocks every 5 minutes.
   `./attackathon/scripts/start_network.sh ln_10`
   * If you want to kill your test network and start fresh, you can 
     re-run this script.
