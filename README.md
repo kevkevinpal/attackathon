@@ -119,11 +119,16 @@ repository to be in the current directory.
   * When you're done with it, bring it down with 
     [./attackathon/scripts/stop_warnet.sh](./scripts/stop_warnet.sh)
 * Start network: [./attackathon/scripts/start_network.sh](/.scripts/start_network.sh)
-  brings up your lightning network, opens channels and simulates 
-  random payments in the network and runs your attack.
+  brings up your lightning network, opens channels, simulates 
+  random payments in the network and mines blocks every 5 minutes.
   `./attackathon/scripts/start_network.sh ln_10`
   * If you want to kill your test network and start fresh, you can 
     re-run this script.
+* Start attacking pods: [./attackathon/scripts/start_attacker.sh](./scripts/start_attacker.sh)
+  brings up the lightning nodes that you will use for your attack and 
+  a bitcoin node that you can use to fund the nodes / mine blocks.
+  * You can use [./attackathon/scripts/stop_attacker.sh](./scripts/stop_attacker.sh) 
+    to tear this down if you'd like to start over at any point.
 
 ## Assessment
 
