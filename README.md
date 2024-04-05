@@ -27,11 +27,11 @@ that downloads, installs and runs your attack in a kubernetes cluster.
 The conventional definition of a jamming attack classifies a node as 
 jammed if for all of its channels: 
 
-All of its local(/outbound) HTLC slots are occupied.
+* All of its local(/outbound) HTLC slots are occupied.
 
 OR
 
-All of its local(/outbound) liquidity is occupied.
+* All of its local(/outbound) liquidity is occupied.
 
 Given that we are operating within the context of a reputation system, 
 we extend our definition of a node being "jammed" to consider the 
@@ -41,15 +41,12 @@ _itself_ to disrupt quality of service.
 We therefore expand our definition of a jamming attack to account for 
 this: 
 
-All of its **general bucket's** local(/outbound) HTLC slots are occupied.
+* All of its **general bucket's** local(/outbound) HTLC slots are occupied.
 
 OR 
 
-All of its **general bucket's** local(/outbound) liquidity is occupied.
-
-AND
-
-All of its peers have **low reputation**.
+* All of its **general bucket's** local(/outbound) liquidity is occupied.
+* All of its peers have **low reputation**.
 
 This expanded definition accounts for the case where an attacker has 
 successfully sabotaged the reputation of all of a node's peers, so they 
