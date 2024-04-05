@@ -28,3 +28,6 @@ echo "Waiting for gossip to sync"
 while warcli scenarios active | grep -q "True"; do
     sleep 1
 done
+
+echo "Mining blocks every 5 minutes"
+warcli scenarios run miner_std --allnodes --interval=300
