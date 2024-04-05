@@ -53,6 +53,11 @@ Some relevant characteristics of the network:
 - The reputation system has been primed with historical forwarding 
   data, so nodes in the network have already had a chance to build 
   up reputation before the attack begins.
+- Each node in the network: 
+  - Allows 483 HTLCs in flight per channel
+  - Allows 45% of its channel's capacity in flight
+  - Allocates 50% of these resources to "general" traffic, and 50% to 
+    protected traffic.
 - The graph was obtained by reducing the mainnet graph using a 
   random walk around our target node, and real-world routing policies 
   are used.
