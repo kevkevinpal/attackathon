@@ -18,14 +18,6 @@ network_name="$1"
 current_directory=$(pwd)
 sim_files="$current_directory/attackathon/data/$network_name"
 
-cd warnet || exit 1
-
-# Activate the virtual environment
-source .venv/bin/activate || exit 1
-
-echo "Preparing historical data"
-python3 "$current_directory/attackathon/setup/progress_timestamps.py" "$sim_files/raw_data.csv" "$sim_files/data.csv"
-
 echo "💣 Bringing up warnet 💣"
 warcli network start "$sim_files/$network_name.graphml" --force
 
@@ -36,6 +28,3 @@ echo "Waiting for gossip to sync"
 while warcli scenarios active | grep -q "True"; do
     sleep 1
 done
-
-echo "TODO: sim-ln is not currently included"
-echo "TODO: Running attack scenario"

@@ -12,27 +12,6 @@ network.
 
 Your goal is to **completely jam a routing node for an hour.**
 
-Given that we are operating within the context of a reputation system, 
-we extend our definition of a node being "jammed" to consider the 
-possibility that the attack may try to use the reputation system 
-_itself_ to disrupt quality of service. We define the severity of a 
-jamming attack as follows:
-
-*Weak*: All of its **outgoing general** slots and liquidity are occupied.
-
--> Endorsed htlcs from high reputation peers can still be forwarded.
-
--> Unendorsed htlcs cannot be forwarded (from any peer).
-
-*Strong*: All of its **outgoing** slots and liquidity are occupied
-OR all of its peers have **low reputation** AND all of its 
-**outgoing general** slots and liquidity are occupied.
-
--> Endorsed htlcs will not be forwarded (due to lack of resources or 
-  peer reputation)
-
--> Unendorsed htlcs cannot be forwarded (from any peer).
-
 Your program should: 
 - Accept the public key of the node being attacked as a parameter. 
 - Write an attack against the [hybrid approach to jamming mitigations](https://research.chaincode.com/2022/11/15/unjamming-lightning/)
@@ -40,8 +19,42 @@ Your program should:
 - Open any channels required to perform the attack, and close them 
   when the attack has competed.
 
-The final deliverable for the attackathon is a [docker image](TODO) 
-that downloads, installs and runs your attack.
+The final deliverable for the attackathon is a [run script](TODO) 
+that downloads, installs and runs your attack in a kubernetes cluster.
+
+## Jamming Definition
+
+The conventional definition of a jamming attack classifies a node as 
+jammed if for all of its channels: 
+
+All of its local(/outbound) HTLC slots are occupied.
+
+OR
+
+All of its local(/outbound) liquidity is occupied.
+
+Given that we are operating within the context of a reputation system, 
+we extend our definition of a node being "jammed" to consider the 
+possibility that the attack may try to use the reputation system 
+_itself_ to disrupt quality of service.
+
+We therefore expand our definition of a jamming attack to account for 
+this: 
+
+All of its **general bucket's** local(/outbound) HTLC slots are occupied.
+
+OR 
+
+All of its **general bucket's** local(/outbound) liquidity is occupied.
+
+AND
+
+All of its peers have **low reputation**.
+
+This expanded definition accounts for the case where an attacker has 
+successfully sabotaged the reputation of all of a node's peers, so they 
+no longer have access to the **protected bucket** which reserves 
+resources for high reputation peers during an attack.
 
 ## Network
 
@@ -54,8 +67,8 @@ Some relevant characteristics of the network:
   data, so nodes in the network have already had a chance to build 
   up reputation before the attack begins.
 - Each node in the network: 
-  - Allows 483 HTLCs in flight per channel
-  - Allows 45% of its channel's capacity in flight
+  - Allows 483 HTLCs in flight per channel.
+  - Allows 45% of its channel's capacity in flight.
   - Allocates 50% of these resources to "general" traffic, and 50% to 
     protected traffic.
 - The graph was obtained by reducing the mainnet graph using a 
@@ -88,6 +101,8 @@ can be used to run your attacks against. Prerequisites to set up this
 network are: 
 * Python3
 * Docker
+* Kubernetes
+* [Just](https://github.com/casey/just)
 
 Clone the attackathon repo:
 `git clone https://github.com/carlaKC/attackathon`
@@ -97,19 +112,23 @@ Clone the attackathon repo:
 The scripts will pull the relevant repositories to your current working
 directory and set up your network. They expect the `attackathon` 
 repository to be in the current directory.
-* Warnet server: [./attackathon/scripts/run_warnet.sh](./scripts/run_warnet.sh) 
+* Warnet server: [./attackathon/scripts/start_warnet.sh](./scripts/start_warnet.sh) 
   sets up the warnet server, which is responsible for orchestration of 
-  the network.
-* Warnet cli: [./attackathon/scripts/run_attack.sh](/.scripts/start_network.sh)
+  the network. 
+  * You'll only need to do this once, but leave it running!
+  * When you're done with it, bring it down with 
+    [./attackathon/scripts/stop_warnet.sh](./scripts/stop_warnet.sh)
+* Start network: [./attackathon/scripts/run_attack.sh](/.scripts/start_network.sh)
   brings up your lightning network, opens channels and simulates 
   random payments in the network and runs your attack.
-  `./attackathon/scripts/run_attack.sh ln_10`
+  `./attackathon/scripts/start_network.sh ln_10`
+  * If you want to kill your test network and start fresh, you can 
+    re-run this script.
 
 ## Assessment
 
 Attacks will be assessed using the following measures:
-- Did the attack achieve a *weak* or *strong* jamming attack, per the 
-  definition provided above.
+- Did the attack achieve a jamming attack as described above?
 - What was the total cost of the attack, considering:
   - On-chain fees: for channel opens and closes, sending funds between 
     nodes on-chain will node be included for simplicity's sake.
