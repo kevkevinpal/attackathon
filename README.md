@@ -118,7 +118,7 @@ repository to be in the current directory.
   * You'll only need to do this once, but leave it running!
   * When you're done with it, bring it down with 
     [./attackathon/scripts/stop_warnet.sh](./scripts/stop_warnet.sh)
-* Start network: [./attackathon/scripts/run_attack.sh](/.scripts/start_network.sh)
+* Start network: [./attackathon/scripts/start_network.sh](/.scripts/start_network.sh)
   brings up your lightning network, opens channels and simulates 
   random payments in the network and runs your attack.
   `./attackathon/scripts/start_network.sh ln_10`
