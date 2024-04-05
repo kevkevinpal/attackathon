@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 usage() {
     echo "Usage: $0 <json_file_path> <duration>"
     echo "Example: $0 /path/to/file.json 10s"
@@ -57,9 +59,9 @@ fi
 # Grab branch that has data writing.
 git remote add carla https://github.com/carlaKC/sim-ln
 
-# Silence some of the louder output.
-git fetch carla > /dev/null 2>&1 
-git checkout carla/attackathon > /dev/null 2>&1 
+# Fetch and checkout carla/attackathon, failing if either command fails
+git fetch carla > /dev/null 2>&1 || { echo "Failed to fetch carla"; exit 1; }
+git checkout carla/attackathon > /dev/null 2>&1 || { echo "Failed to checkout carla/attackathon"; exit 1; }
 
 echo "Installing sim-ln for data generation"
 cargo install --locked --path sim-cli
@@ -68,8 +70,9 @@ cargo install --locked --path sim-cli
 git remote remove carla
 git checkout main > /dev/null 2>&1 
 
-echo "Generating historical data for $duration seconds, this might take a while!"
-sim-cli -l debug -c 10 -s "$simfile" -t "$duration"
+runtime=($duration/1000)
+echo "Generating historical data for $duration seconds, will take: $runtime seconds with speedup of 1000"
+sim-cli -c 1000 -s "$simfile" -t "$duration"
 
 # Copy the raw sim-ln data from its output folder to our attackathon data dir. 
 raw_data="$sim_files"/raw_data.csv
