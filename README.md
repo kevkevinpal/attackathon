@@ -127,6 +127,8 @@ repository to be in the current directory.
 * Start attacking pods: [./attackathon/scripts/start_attacker.sh](./scripts/start_attacker.sh)
   brings up the lightning nodes that you will use for your attack and 
   a bitcoin node that you can use to fund the nodes / mine blocks.
+  * You can use [./attackathon/scripts/stop_attacker.sh](./scripts/stop_attacker.sh) 
+    to tear this down if you'd like to start over at any point.
 
 ## Assessment
 
