@@ -72,7 +72,7 @@ git checkout main > /dev/null 2>&1
 
 runtime=($duration/1000)
 echo "Generating historical data for $duration seconds, will take: $runtime seconds with speedup of 1000"
-sim-cli -c 1000 -s "$simfile" -t "$duration"
+sim-cli --clock-speedup 1000 -s "$simfile" -t "$duration"
 
 # Copy the raw sim-ln data from its output folder to our attackathon data dir. 
 raw_data="$sim_files"/raw_data.csv
