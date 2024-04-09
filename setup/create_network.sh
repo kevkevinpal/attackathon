@@ -104,6 +104,20 @@ wait $warnet_pid 2>/dev/null
 
 cd ..
 
+# We need to manually insert a sim-ln attribute + key to warnet graph.
+data_tab='<key id="services" attr.name="services" attr.type="string" for="graph"/>'
+escaped_data_tab=$(printf '%s\n' "$data_tab" | sed -e 's/[\/&]/\\&/g')
+
+sed -i '' "  /<key id=\"target_policy\" for=\"edge\" attr.name=\"target_policy\" attr.type=\"string\" \/>/a\\
+${escaped_data_tab}
+" "$warnet_file"
+
+simln_key='<data key="services">simln</data>'
+escaped_simln_key=$(printf '%s\n' "$simln_key" | sed -e 's/[\/&]/\\&/g')
+sed -i '' "/<graph edgedefault=\"directed\">/a\\
+${escaped_simln_key}
+" "$warnet_file"
+
 # Finally, progress our timstamps so that we're ready to roll!
 # The user-provided scripts should do this anyway, but we update them to know it works.
 python3 ./attackathon/setup/progress_timestamps.py "$raw_data" "$processed_data"
