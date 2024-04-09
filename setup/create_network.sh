@@ -76,11 +76,9 @@ else
     echo "Generating historical data for $duration seconds, will take: $runtime seconds with speedup of 1000"
     sim-cli --clock-speedup 1000 -s "$simfile" -t "$duration"
 
-    raw_data="$sim_files/raw_data.csv"
+    raw_data="$sim_files/data.csv"
     cp results/htlc_forwards.csv "$raw_data"
     cd ..
-
-    processed_data="$sim_files/data.csv"
 fi
 
 # Before we actually bump our timestamps, we'll spin up warnet to generate a graphml file that
@@ -118,10 +116,6 @@ escaped_simln_key=$(printf '%s\n' "$simln_key" | sed -e 's/[\/&]/\\&/g')
 sed -i '' "/<graph edgedefault=\"directed\">/a\\
 ${escaped_simln_key}
 " "$warnet_file"
-
-# Finally, progress our timstamps so that we're ready to roll!
-# The user-provided scripts should do this anyway, but we update them to know it works.
-python3 ./attackathon/setup/progress_timestamps.py "$raw_data" "$processed_data"
 
 echo "Setup complete!"
 
