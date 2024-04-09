@@ -21,3 +21,6 @@ while true; do
         sleep 1
     fi
 done
+
+echo "Copying in attacking node credentials"
+./attackathon/scripts/credentials.sh
