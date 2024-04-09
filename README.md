@@ -165,6 +165,7 @@ working directory*:
 1. [This repo](https://github.com/carlaKC/attackathon)
 2. [Warnet](https://github.com/bitcoin-dev-project/warnet)
 3. [SimLN](https://github.com/bitcoin-dev-project/sim-ln)
+3. [Circuitbreaker](https://github.com/lightningequipment/circuitbreaker)
 
 You will need to provide: 
 1. A `json` file with the same format as LND's `describegraph` output 
@@ -173,17 +174,22 @@ You will need to provide:
   setup script to generate fake historical forwards for all the nodes 
   in the network for.
 
-The setup script provided will generate all required files for you:
+The setup script provided will generate all required files and docker 
+images for you:
 `./attackathon/setup/create_network.sh {path to json file} {duration in seconds}`
 
-Note that you *must* run this from your directory containing `warnet` 
-and `simln` because it moves between directories to achieve various 
-tasks! The name that you give the `json` file is considered to be 
-your `network_name`. 
+Note that you *must* run this from your directory containing `warnet`, 
+`simln` and `circuitbreaker` because it moves between directories to 
+achieve various tasks! The name that you give the `json` file is 
+considered to be your `network_name`. 
 
 Once the script has completed, check in any files that it generated and 
 provide your students with the following: 
 1. The `network_name` for your attackathon.
 2. The attackathon repo (/branch) with all files checked in.
+
+The script currently hardcodes the docker hub account for images to 
+`carlakirkcohen` and tries to push to it, so you'll need to search and 
+replace if you want to test the full flow.
 
 </details>
