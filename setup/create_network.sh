@@ -90,15 +90,17 @@ source .venv/bin/activate > /dev/null 2>&1
 pip install -e . > /dev/null 2>&1 
 
 # Run warnet in the background and capture pid for shutdown.
-warnet &
+warnet > /dev/null 2>&1 &
 warnet_pid=$!
 
 warnet_file="$sim_files"/"$network_name".graphml
 warcli graph import-json "$json_file" --outfile="$warnet_file" > /dev/null 2>&1 
 
 # Shut warnet down
-kill $warnet_pid
-wait $warnet_pid 2>/dev/null
+kill $warnet_pid > /dev/null 2>&1
+if ps -p $warnet_pid > /dev/null; then
+    wait $warnet_pid 2>/dev/null
+fi
 
 cd ..
 
