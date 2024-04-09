@@ -3,8 +3,9 @@
 set -e
 
 usage() {
-    echo "Usage: $0 <json_file_path> <duration>"
-    echo "Example: $0 /path/to/file.json 10s"
+    echo "Usage: $0 <json_file_path> {duration}"
+    echo "Example: $0 /path/to/file.json 100: creates network with 100 seconds of historical data"
+    echo "Example: $0 /path/to/file.json: creates network but does not generate historical data"
     exit 1
 }
 
@@ -24,7 +25,7 @@ if ! command -v rustc &> /dev/null; then
 fi
 
 # Check if required arguments are provided
-if [ $# -ne 2 ]; then
+if [ $# -gt 2 ]; then
     usage
 fi
 
@@ -46,41 +47,41 @@ sim_files="$current_directory"/attackathon/data/"$network_name"
 echo "Creating simulation files in: "$sim_files""
 mkdir -p $sim_files
 
-echo "Generating sim-ln file for historical payment generation"
-simfile="$sim_files"/simln.json
-python3 attackathon/setup/lnd_to_simln.py "$json_file" "$simfile"
-cd sim-ln
+if [ -z "$2" ]; then
+    echo "Duration argument not provided: not generating historical data for network"
+else
+    echo "Duration argument provided: generating historical data"
+	
+    simfile="$sim_files"/simln.json
+    python3 attackathon/setup/lnd_to_simln.py "$json_file" "$simfile"
+    cd sim-ln
+	
+    if [[ -n $(git status --porcelain) ]]; then
+        echo "Error: there are unsaved changes in sim-ln, please stash them!"
+        exit 1
+    fi
 
-if [[ -n $(git status --porcelain) ]]; then
-    echo "Error: there are unsaved changes in sim-ln, please stash them!"
-    exit 1
+    git remote add carla https://github.com/carlaKC/sim-ln
+
+    git fetch carla > /dev/null 2>&1 || { echo "Failed to fetch carla"; exit 1; }
+    git checkout carla/attackathon > /dev/null 2>&1 || { echo "Failed to checkout carla/attackathon"; exit 1; }
+
+    echo "Installing sim-ln for data generation"
+    cargo install --locked --path sim-cli
+
+    git remote remove carla
+    git checkout main > /dev/null 2>&1
+
+    runtime=$((duration / 1000))
+    echo "Generating historical data for $duration seconds, will take: $runtime seconds with speedup of 1000"
+    sim-cli --clock-speedup 1000 -s "$simfile" -t "$duration"
+
+    raw_data="$sim_files/raw_data.csv"
+    cp results/htlc_forwards.csv "$raw_data"
+    cd ..
+
+    processed_data="$sim_files/data.csv"
 fi
-
-# Grab branch that has data writing.
-git remote add carla https://github.com/carlaKC/sim-ln
-
-# Fetch and checkout carla/attackathon, failing if either command fails
-git fetch carla > /dev/null 2>&1 || { echo "Failed to fetch carla"; exit 1; }
-git checkout carla/attackathon > /dev/null 2>&1 || { echo "Failed to checkout carla/attackathon"; exit 1; }
-
-echo "Installing sim-ln for data generation"
-cargo install --locked --path sim-cli
-
-# Clean up after ourselves.
-git remote remove carla
-git checkout main > /dev/null 2>&1 
-
-runtime=($duration/1000)
-echo "Generating historical data for $duration seconds, will take: $runtime seconds with speedup of 1000"
-sim-cli --clock-speedup 1000 -s "$simfile" -t "$duration"
-
-# Copy the raw sim-ln data from its output folder to our attackathon data dir. 
-raw_data="$sim_files"/raw_data.csv
-cp results/htlc_forwards.csv "$raw_data"
-cd ..
-
-# Set the location where we'll output our progressed timestamp output.
-processed_data="$sim_files"/data.csv
 
 # Before we actually bump our timestamps, we'll spin up warnet to generate a graphml file that
 # will use our generated data.
