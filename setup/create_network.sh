@@ -3,8 +3,9 @@
 set -e
 
 usage() {
-    echo "Usage: $0 <json_file_path> <duration>"
-    echo "Example: $0 /path/to/file.json 10s"
+    echo "Usage: $0 <json_file_path> {duration}"
+    echo "Example: $0 /path/to/file.json 100: creates network with 100 seconds of historical data"
+    echo "Example: $0 /path/to/file.json: creates network but does not generate historical data"
     exit 1
 }
 
@@ -24,7 +25,7 @@ if ! command -v rustc &> /dev/null; then
 fi
 
 # Check if required arguments are provided
-if [ $# -ne 2 ]; then
+if [ $# -gt 2 ]; then
     usage
 fi
 
@@ -46,41 +47,39 @@ sim_files="$current_directory"/attackathon/data/"$network_name"
 echo "Creating simulation files in: "$sim_files""
 mkdir -p $sim_files
 
-echo "Generating sim-ln file for historical payment generation"
-simfile="$sim_files"/simln.json
-python3 attackathon/setup/lnd_to_simln.py "$json_file" "$simfile"
-cd sim-ln
+if [ -z "$2" ]; then
+    echo "Duration argument not provided: not generating historical data for network"
+else
+    echo "Duration argument provided: generating historical data"
+	
+    simfile="$sim_files"/simln.json
+    python3 attackathon/setup/lnd_to_simln.py "$json_file" "$simfile"
+    cd sim-ln
+	
+    if [[ -n $(git status --porcelain) ]]; then
+        echo "Error: there are unsaved changes in sim-ln, please stash them!"
+        exit 1
+    fi
 
-if [[ -n $(git status --porcelain) ]]; then
-    echo "Error: there are unsaved changes in sim-ln, please stash them!"
-    exit 1
+    git remote add carla https://github.com/carlaKC/sim-ln
+
+    git fetch carla > /dev/null 2>&1 || { echo "Failed to fetch carla"; exit 1; }
+    git checkout carla/attackathon > /dev/null 2>&1 || { echo "Failed to checkout carla/attackathon"; exit 1; }
+
+    echo "Installing sim-ln for data generation"
+    cargo install --locked --path sim-cli
+
+    git remote remove carla
+    git checkout main > /dev/null 2>&1
+
+    runtime=$((duration / 1000))
+    echo "Generating historical data for $duration seconds, will take: $runtime seconds with speedup of 1000"
+    sim-cli --clock-speedup 1000 -s "$simfile" -t "$duration"
+
+    raw_data="$sim_files/data.csv"
+    cp results/htlc_forwards.csv "$raw_data"
+    cd ..
 fi
-
-# Grab branch that has data writing.
-git remote add carla https://github.com/carlaKC/sim-ln
-
-# Fetch and checkout carla/attackathon, failing if either command fails
-git fetch carla > /dev/null 2>&1 || { echo "Failed to fetch carla"; exit 1; }
-git checkout carla/attackathon > /dev/null 2>&1 || { echo "Failed to checkout carla/attackathon"; exit 1; }
-
-echo "Installing sim-ln for data generation"
-cargo install --locked --path sim-cli
-
-# Clean up after ourselves.
-git remote remove carla
-git checkout main > /dev/null 2>&1 
-
-runtime=($duration/1000)
-echo "Generating historical data for $duration seconds, will take: $runtime seconds with speedup of 1000"
-sim-cli --clock-speedup 1000 -s "$simfile" -t "$duration"
-
-# Copy the raw sim-ln data from its output folder to our attackathon data dir. 
-raw_data="$sim_files"/raw_data.csv
-cp results/htlc_forwards.csv "$raw_data"
-cd ..
-
-# Set the location where we'll output our progressed timestamp output.
-processed_data="$sim_files"/data.csv
 
 # Before we actually bump our timestamps, we'll spin up warnet to generate a graphml file that
 # will use our generated data.
@@ -91,22 +90,33 @@ source .venv/bin/activate > /dev/null 2>&1
 pip install -e . > /dev/null 2>&1 
 
 # Run warnet in the background and capture pid for shutdown.
-# NB!!! currently running on: https://github.com/carlaKC/warnet/tree/attackathon-network
-warnet &
+warnet > /dev/null 2>&1 &
 warnet_pid=$!
 
 warnet_file="$sim_files"/"$network_name".graphml
-warcli graph import-json "$json_file" --cb_data="$processed_data" --outfile="$warnet_file" > /dev/null 2>&1 
+warcli graph import-json "$json_file" --outfile="$warnet_file" > /dev/null 2>&1 
 
 # Shut warnet down
-kill $warnet_pid
-wait $warnet_pid 2>/dev/null
+kill $warnet_pid > /dev/null 2>&1
+if ps -p $warnet_pid > /dev/null; then
+    wait $warnet_pid 2>/dev/null
+fi
 
 cd ..
 
-# Finally, progress our timstamps so that we're ready to roll!
-# The user-provided scripts should do this anyway, but we update them to know it works.
-python3 ./attackathon/setup/progress_timestamps.py "$raw_data" "$processed_data"
+# We need to manually insert a sim-ln attribute + key to warnet graph.
+data_tab='<key id="services" attr.name="services" attr.type="string" for="graph"/>'
+escaped_data_tab=$(printf '%s\n' "$data_tab" | sed -e 's/[\/&]/\\&/g')
+
+sed -i '' "  /<key id=\"target_policy\" for=\"edge\" attr.name=\"target_policy\" attr.type=\"string\" \/>/a\\
+${escaped_data_tab}
+" "$warnet_file"
+
+simln_key='<data key="services">simln</data>'
+escaped_simln_key=$(printf '%s\n' "$simln_key" | sed -e 's/[\/&]/\\&/g')
+sed -i '' "/<graph edgedefault=\"directed\">/a\\
+${escaped_simln_key}
+" "$warnet_file"
 
 echo "Setup complete!"
 

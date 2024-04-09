@@ -36,3 +36,7 @@ done
 
 echo "Mining blocks every 5 minutes"
 warcli scenarios run miner_std --allnodes --interval=300
+
+# Sim-ln should already be running if we added it in the graph file, export creds here.
+echo "Generating random payment activity"
+warcli network export
