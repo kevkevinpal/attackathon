@@ -21,6 +21,8 @@ sim_files="$current_directory/attackathon/data/$network_name"
 echo "💣 Bringing up warnet 💣"
 warcli network start "$sim_files/$network_name.graphml" --force
 
+sleep 10
+
 echo "Waiting for L1 p2p connections"
 while warcli network connected | grep -q "False"; do
     sleep 1
