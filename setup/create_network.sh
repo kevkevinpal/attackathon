@@ -19,6 +19,11 @@ if [ ! -d "sim-ln" ]; then
 	exit 1
 fi
 
+if [ ! -d "circuitbreaker" ]; then
+    echo "Error: Circuitbreaker directory not found. Make sure to clone circuitbreaker before running this script."
+    exit 1
+fi
+
 if ! command -v rustc &> /dev/null; then
     echo "Error: Rust compiler (rustc) is not installed. Please install Rust from https://www.rust-lang.org/."
     exit 1
@@ -78,6 +83,31 @@ else
 
     raw_data="$sim_files/data.csv"
     cp results/htlc_forwards.csv "$raw_data"
+    cd ..
+
+    echo "Building circuitbreaker image with new data"
+    cd circuitbreaker
+
+    if [[ -n $(git status --porcelain) ]]; then
+        echo "Error: there are unsaved changes in circuitbreaker, please stash them!"
+        exit 1
+    fi
+
+    git remote add carla https://github.com/carlaKC/circuitbreaker
+
+    git fetch carla > /dev/null 2>&1 || { echo "Failed to fetch carla/circuitbreaker"; exit 1; }
+    git checkout carla/attackathon > /dev/null 2>&1 || { echo "Failed to checkout carla/circuitbreaker/attackathon"; exit 1; }
+
+    cp "$raw_data" historical_data/raw_data_csv
+
+    docker_tag="carlakirkcohen/circuitbreaker:attackathon-$network_name"
+    # Build with no cache because docker is sometimes funny with not detecting changes in the files being copied in.
+    docker build . -t "$docker_tag"	--no-cache
+    docker push "$docker_tag"
+
+    git remote remove carla
+    git checkout master > /dev/null 2>&1
+
     cd ..
 fi
 
