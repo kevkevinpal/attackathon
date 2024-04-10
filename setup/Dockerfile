@@ -2,7 +2,7 @@
 FROM ubuntu:24.04
 
 # Install required utilities
-RUN apt-get update && apt-get install -y wget vim curl
+RUN apt-get update && apt-get install -y wget vim curl jq
 
 # Download and install neovim
 RUN apt-get install -y neovim
@@ -37,6 +37,9 @@ COPY run.sh /run.sh
 RUN chmod +x run.sh
 
 COPY lncli.sh /lncli.sh
+
+COPY fund.sh /fund.sh
+RUN chmod +x fund.sh
 
 # Set entrypoint to just sleep indefinitely - attackers will run their own scripts.
 ENTRYPOINT ["bash", "-c", "while true; do sleep 30; done;"]
