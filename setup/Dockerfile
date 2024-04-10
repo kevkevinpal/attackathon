@@ -32,5 +32,9 @@ RUN wget https://github.com/lightningnetwork/lnd/releases/download/v0.17.4-beta/
     mv lnd-linux-arm64-v0.17.4-beta/lncli /bin && \
     rm -rf lnd-linux-arm64-v0.17.4-beta.tar.gz lnd-linux-arm64-v0.17.4-beta
 
+# Copy in run script that is a placeholder for attacker code.
+COPY run.sh /run.sh
+RUN chmod +x run.sh
+
 # Set entrypoint to just sleep indefinitely - attackers will run their own scripts.
 ENTRYPOINT ["bash", "-c", "while true; do sleep 30; done;"]
