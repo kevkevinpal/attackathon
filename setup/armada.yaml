@@ -177,8 +177,8 @@ spec:
     - --bitcoind.zmqpubrawtx=tcp://bitcoind.warnet-armada:28333
     - --rpclisten=0.0.0.0:10009
     - --alias=0
-    - --externalhosts=lightning-0.warnet-armada
-    - --tlsextradomain=lightning-0.warnet-armada
+    - --externalhosts=lightning-1.warnet-armada
+    - --tlsextradomain=lightning-1.warnet-armada
     - ""
     env:
     - name: LN_IMPL
@@ -246,8 +246,8 @@ spec:
     - --bitcoind.zmqpubrawtx=tcp://bitcoind.warnet-armada:28333
     - --rpclisten=0.0.0.0:10009
     - --alias=0
-    - --externalhosts=lightning-0.warnet-armada
-    - --tlsextradomain=lightning-0.warnet-armada
+    - --externalhosts=lightning-2.warnet-armada
+    - --tlsextradomain=lightning-2.warnet-armada
     - ""
     env:
     - name: LN_IMPL
