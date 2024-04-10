@@ -300,7 +300,5 @@ metadata:
 spec:
   containers:
   - name: ubuntu
-    image: ubuntu:24.04
-    # Just spin & wait forever
-    command: [ "/bin/bash", "-c", "--" ]
-    args: [ "while true; do sleep 30; done;" ]
+    image: carlakirkcohen/flagship:latest
+    imagePullPolicy: IfNotPresent
