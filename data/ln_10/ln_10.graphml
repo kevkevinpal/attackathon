@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
   <key id="target_policy" for="edge" attr.name="target_policy" attr.type="string" />
+<key id="services" attr.name="services" attr.type="string" for="graph"/>
   <key id="source_policy" for="edge" attr.name="source_policy" attr.type="string" />
   <key id="channel_open" for="edge" attr.name="channel_open" attr.type="string" />
   <key id="image" for="node" attr.name="image" attr.type="string" />
@@ -14,6 +15,7 @@
   <key id="bitcoin_config" for="node" attr.name="bitcoin_config" attr.type="string" />
   <key id="version" for="node" attr.name="version" attr.type="string" />
   <graph edgedefault="directed">
+<data key="services">simln</data>
     <node id="0">
       <data key="version">26.0</data>
       <data key="bitcoin_config">-uacomment=tank000000</data>
