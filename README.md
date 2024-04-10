@@ -84,10 +84,25 @@ repository to be in the current directory.
   * If you want to kill your test network and start fresh, you can 
     use [./attackathon/scripts/stop_network.sh ln_10](./scripts/stop_network.sh)
 * Start attacking pods: [./attackathon/scripts/start_attacker.sh](./scripts/start_attacker.sh)
-  brings up the lightning nodes that you will use for your attack and 
-  a bitcoin node that you can use to fund the nodes / mine blocks.
+  brings up three lightning nodes that you will use for your attack, 
+  a bitcoin node and an empty `flagship` container to run your attack 
+  from.
   * You can use [./attackathon/scripts/stop_attacker.sh](./scripts/stop_attacker.sh) 
     to tear this down if you'd like to start over at any point.
+
+Once you have brought your cluster up, you'll be able to execute your 
+program from *inside* of the cluster's `flagship` pod:
+* `kubectl exec -it flagship -n warnet-armada -- bash`
+* Update `run.sh` to:
+  * Install your program.
+  * Run your program using the credentials provided inline.
+
+The following utilities are available for your convenience:
+* `source ./lncli.sh` provides aliases for your LND nodes (`lncli0`, 
+  `lncli1`, `lncli2`)
+* `./fund.sh` funds each of your LND nodes.
+* `bitcoin-cli` provides access to the bitcoin node that all three 
+  LND nodes are connected to.
 
 ## Network Information
 
