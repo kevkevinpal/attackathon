@@ -828,7 +828,7 @@
             "last_update": 1709865042,
             "capacity": "400000",
             "node1_policy": {
-                "time_lock_delta": 10,
+                "time_lock_delta": 18,
                 "min_htlc": "1",
                 "fee_base_msat": "500",
                 "fee_rate_milli_msat": "1",
@@ -886,7 +886,7 @@
             "last_update": 1710793630,
             "capacity": "4000000",
             "node1_policy": {
-                "time_lock_delta": 10,
+                "time_lock_delta": 18,
                 "min_htlc": "1",
                 "fee_base_msat": "500",
                 "fee_rate_milli_msat": "1",
