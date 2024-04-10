@@ -176,7 +176,7 @@ spec:
     - --bitcoind.zmqpubrawblock=tcp://bitcoind.warnet-armada:28332
     - --bitcoind.zmqpubrawtx=tcp://bitcoind.warnet-armada:28333
     - --rpclisten=0.0.0.0:10009
-    - --alias=0
+    - --alias=1
     - --externalhosts=lightning-1.warnet-armada
     - --tlsextradomain=lightning-1.warnet-armada
     - ""
@@ -245,7 +245,7 @@ spec:
     - --bitcoind.zmqpubrawblock=tcp://bitcoind.warnet-armada:28332
     - --bitcoind.zmqpubrawtx=tcp://bitcoind.warnet-armada:28333
     - --rpclisten=0.0.0.0:10009
-    - --alias=0
+    - --alias=2
     - --externalhosts=lightning-2.warnet-armada
     - --tlsextradomain=lightning-2.warnet-armada
     - ""
