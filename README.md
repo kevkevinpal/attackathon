@@ -49,43 +49,12 @@ successfully sabotaged the reputation of all of a node's peers, so they
 no longer have access to the **protected bucket** which reserves 
 resources for high reputation peers during an attack.
 
-## Network
+### Development Environment
 
 The attack you develop will be tested against a [warnet](https://warnet.dev/)
 running a network of [LND](https://github.com/carlaKC/lnd/tree/7883-experimental-endorsement) 
 nodes that have the jamming attack mitigation implemented* (via an 
 external tool called circuitbreaker).
-
-Some relevant characteristics of the network: 
-- The reputation system has been primed with historical forwarding 
-  data, so nodes in the network have already had a chance to build 
-  up reputation before the attack begins.
-- Each node in the network: 
-  - Allows 483 HTLCs in flight per channel.
-  - Allows 45% of its channel's capacity in flight.
-  - Allocates 50% of these resources to "general" traffic, and 50% to 
-    protected traffic.
-- The graph was obtained by reducing the mainnet graph using a 
-  random walk around our target node, and real-world routing policies 
-  are used.
-- When you run the attack, the non-malicious nodes in the network will 
-  be executing [randomly generated payments](https://simln.dev) to 
-  mimic an active network.
-
-Some APIS to note:
-- [AddHoldInvoice](https://lightning.engineering/api-docs/api/lnd/invoices/add-hold-invoice)
-  creates an invoice that can be manually [settled](https://lightning.engineering/api-docs/api/lnd/invoices/settle-invoice) 
-  or [canceled](https://lightning.engineering/api-docs/api/lnd/invoices/cancel-invoice)
-- Endorsement signals can be set on the [SendToRoute](https://lightning.engineering/api-docs/api/lnd/router/send-to-route-v2)
-  or [SendPayment](https://lightning.engineering/api-docs/api/lnd/router/send-payment-v2)
-  APIs.
-
-\* Note that endorsement signaling and reputation tracking are fully 
-deployed on the test network, but unconditional fees are not. You should
-assume that they will be 1% of your success-case fees, and we will 
-account for them during attack analysis.
-
-### Local Development
 
 To assist with local development, we've provided a test network that 
 can be used to run your attacks against. Prerequisites to set up this 
@@ -119,6 +88,37 @@ repository to be in the current directory.
   a bitcoin node that you can use to fund the nodes / mine blocks.
   * You can use [./attackathon/scripts/stop_attacker.sh](./scripts/stop_attacker.sh) 
     to tear this down if you'd like to start over at any point.
+
+## Network Information
+
+Some relevant characteristics of the network: 
+- The reputation system has been primed with historical forwarding 
+  data, so nodes in the network have already had a chance to build 
+  up reputation before the attack begins.
+- Each node in the network: 
+  - Allows 483 HTLCs in flight per channel.
+  - Allows 45% of its channel's capacity in flight.
+  - Allocates 50% of these resources to "general" traffic, and 50% to 
+    protected traffic.
+- The graph was obtained by reducing the mainnet graph using a 
+  random walk around our target node, and real-world routing policies 
+  are used.
+- When you run the attack, the non-malicious nodes in the network will 
+  be executing [randomly generated payments](https://simln.dev) to 
+  mimic an active network.
+
+Some APIS to note:
+- [AddHoldInvoice](https://lightning.engineering/api-docs/api/lnd/invoices/add-hold-invoice)
+  creates an invoice that can be manually [settled](https://lightning.engineering/api-docs/api/lnd/invoices/settle-invoice) 
+  or [canceled](https://lightning.engineering/api-docs/api/lnd/invoices/cancel-invoice)
+- Endorsement signals can be set on the [SendToRoute](https://lightning.engineering/api-docs/api/lnd/router/send-to-route-v2)
+  or [SendPayment](https://lightning.engineering/api-docs/api/lnd/router/send-payment-v2)
+  APIs.
+
+\* Note that endorsement signaling and reputation tracking are fully 
+deployed on the test network, but unconditional fees are not. You should
+assume that they will be 1% of your success-case fees, and we will 
+account for them during attack analysis.
 
 ## Assessment
 
