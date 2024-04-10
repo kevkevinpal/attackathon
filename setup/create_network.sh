@@ -52,6 +52,8 @@ sim_files="$current_directory"/attackathon/data/"$network_name"
 echo "Creating simulation files in: "$sim_files""
 mkdir -p $sim_files
 
+docker_tag="carlakirkcohen/circuitbreaker:attackathon-$network_name"
+
 if [ -z "$2" ]; then
     echo "Duration argument not provided: not generating historical data for network"
 else
@@ -100,7 +102,6 @@ else
 
     cp "$raw_data" historical_data/raw_data_csv
 
-    docker_tag="carlakirkcohen/circuitbreaker:attackathon-$network_name"
     # Build with no cache because docker is sometimes funny with not detecting changes in the files being copied in.
     docker build . -t "$docker_tag"	--no-cache
     docker push "$docker_tag"
