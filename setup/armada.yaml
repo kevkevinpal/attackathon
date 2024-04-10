@@ -114,7 +114,7 @@ spec:
     env:
     - name: LN_IMPL
       value: lnd
-    image: lightninglabs/lnd:v0.15.5-beta
+    image: carlakirkcohen/lnd:attackathon
     imagePullPolicy: IfNotPresent
     name: ln
     readinessProbe:
@@ -183,7 +183,7 @@ spec:
     env:
     - name: LN_IMPL
       value: lnd
-    image: lightninglabs/lnd:v0.15.5-beta
+    image: carlakirkcohen/lnd:attackathon
     imagePullPolicy: IfNotPresent
     name: ln
     readinessProbe:
@@ -252,7 +252,7 @@ spec:
     env:
     - name: LN_IMPL
       value: lnd
-    image: lightninglabs/lnd:v0.15.5-beta
+    image: carlakirkcohen/lnd:attackathon
     imagePullPolicy: IfNotPresent
     name: ln
     readinessProbe:
@@ -300,7 +300,5 @@ metadata:
 spec:
   containers:
   - name: ubuntu
-    image: ubuntu:24.04
-    # Just spin & wait forever
-    command: [ "/bin/bash", "-c", "--" ]
-    args: [ "while true; do sleep 30; done;" ]
+    image: carlakirkcohen/flagship:latest
+    imagePullPolicy: IfNotPresent
