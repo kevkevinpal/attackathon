@@ -101,6 +101,8 @@ The following utilities are available for your convenience:
 * `source ./lncli.sh` provides aliases for your LND nodes (`lncli0`, 
   `lncli1`, `lncli2`)
 * `./fund.sh` funds each of your LND nodes.
+* `./connect_nodes.sh` connects the attacking nodes to the network 
+   so that they can sync gossip.
 * `bitcoin-cli` provides access to the bitcoin node that all three 
   LND nodes are connected to.
 
