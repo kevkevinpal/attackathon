@@ -36,5 +36,7 @@ RUN wget https://github.com/lightningnetwork/lnd/releases/download/v0.17.4-beta/
 COPY run.sh /run.sh
 RUN chmod +x run.sh
 
+COPY lncli.sh /lncli.sh
+
 # Set entrypoint to just sleep indefinitely - attackers will run their own scripts.
 ENTRYPOINT ["bash", "-c", "while true; do sleep 30; done;"]
