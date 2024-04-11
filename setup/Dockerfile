@@ -7,6 +7,12 @@ RUN apt-get update && apt-get install -y wget vim curl jq
 # Download and install neovim
 RUN apt-get install -y neovim
 
+# Install Golang
+RUN apt-get install -y golang
+
+# Install Rust
+RUN apt-get install -y rustc
+
 # Download Bitcoin Core
 RUN wget https://bitcoincore.org/bin/bitcoin-core-26.1/bitcoin-26.1-aarch64-linux-gnu.tar.gz
 
