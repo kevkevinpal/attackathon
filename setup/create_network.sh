@@ -103,8 +103,7 @@ else
     cp "$raw_data" historical_data/raw_data_csv
 
     # Build with no cache because docker is sometimes funny with not detecting changes in the files being copied in.
-    docker build . -t "$docker_tag"	--no-cache
-    docker push "$docker_tag"
+    docker build --platform linux/amd64,linux/arm64 -t "$docker_tag" --no-cache --push .
 
     git remote remove carla
     git checkout master > /dev/null 2>&1
