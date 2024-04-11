@@ -55,7 +55,7 @@ may be abused in various ways, and we encourage you to explore them!
 ### Development Environment
 
 The attack you develop will be tested against a [warnet](https://warnet.dev/)
-running a network of [LND](https://github.com/carlaKC/lnd/tree/7883-experimental-endorsement) 
+running a network of [LND](https://github.com/carlaKC/lnd/tree/attackathon) 
 nodes that have the jamming attack mitigation implemented* (via an 
 external tool called circuitbreaker).
 
@@ -99,6 +99,11 @@ program from *inside* of the cluster's `flagship` pod:
 * Update `run.sh` to:
   * Install your program.
   * Run your program using the credentials provided inline.
+
+⚠️ Remember that we're using a [fork](https://github.com/carlaKC/lnd/tree/attackathon)
+of LND so you'll need to account for that if you're using common RPC 
+client libraires to have access to `endorsement` fields (golang client 
+is available [here](https://github.com/carlaKC/lndclient/tree/attackathon)).
 
 The following utilities are available for your convenience:
 * `source ./lncli.sh` provides aliases for your LND nodes (`lncli0`, 
