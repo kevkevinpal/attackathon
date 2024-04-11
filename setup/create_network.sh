@@ -124,7 +124,7 @@ warnet > /dev/null 2>&1 &
 warnet_pid=$!
 
 warnet_file="$sim_files"/"$network_name".graphml
-warcli graph import-json "$json_file" --outfile="$warnet_file" --cb="$docker_tag"> /dev/null 2>&1 
+warcli graph import-json "$json_file" --outfile="$warnet_file" --cb="$docker_tag" --ln_image=carlakirkcohen/lnd:attackathon> /dev/null 2>&1 
 
 # Shut warnet down
 kill $warnet_pid > /dev/null 2>&1
