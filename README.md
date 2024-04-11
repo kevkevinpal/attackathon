@@ -61,7 +61,7 @@ can be used to run your attacks against. Prerequisites to set up this
 network are: 
 * Python3
 * Docker
-* Kubernetes
+* Kubernetes (see [docker desktop instructions if relevant](https://docs.docker.com/desktop/kubernetes/))
 * [Just](https://github.com/casey/just)
 
 Clone the attackathon repo:
