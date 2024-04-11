@@ -41,5 +41,8 @@ COPY lncli.sh /lncli.sh
 COPY fund.sh /fund.sh
 RUN chmod +x fund.sh
 
+COPY connect_nodes.sh /connect_nodes.sh
+RUN chmod +x connect_nodes.sh
+
 # Set entrypoint to just sleep indefinitely - attackers will run their own scripts.
 ENTRYPOINT ["bash", "-c", "while true; do sleep 30; done;"]
