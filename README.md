@@ -16,38 +16,41 @@ Your program should:
 - Open any channels required to perform the attack, and close them 
   when the attack has competed.
 
-The final deliverable for the attackathon is a [run script](TODO) 
+The final deliverable for the attackathon is a [run script](./setup/run.sh) 
 that downloads, installs and runs your attack in a kubernetes cluster.
 
 ## Jamming Definition
 
-The conventional definition of a jamming attack classifies a node as 
-jammed if for all of its channels: 
-
+We're aiming to jam a routing node, which we define as: 
 ```
-All of its local(/outbound) HTLC slots are occupied.
+The target node is unable to facillitate forwading of HTLCs on behalf 
+of of nodes in the network.
+```
+
+Conventionally, this is achieved when:
+```
+All of the target node's local(/outbound) HTLC slots are occupied.
 OR 
-All of its local(/outbound) liquidity is occupied.
+All of the target node's local(/outbound) liquidity is occupied.
 ```
 
-Given that we are operating within the context of a reputation system, 
-we extend our definition of a node being "jammed" to consider the 
-possibility that the attack may try to use the reputation system 
-_itself_ to disrupt quality of service.
+However, given that we are operating within the context of a specific 
+mitigation, we need to consider the possibility that the attack may 
+try to use the mitigation _itself_ to disrupt quality of service.
 
-We therefore expand our definition of a jamming attack to account for 
-this: 
-
+In general, our reputation and resource bucketing mitigation may be 
+abused by an attacker to jam a channel if: 
 ```
-All of its general bucket's local(/outbound) liquidity is occupied
-AND 
-All of its peers have low reputation
+All of its general bucket's local(/outbound) liquidity OR slots are occupied.
+AND
+Peers looking to use the channel have low reputation.
 ```
 
-This expanded definition accounts for the case where an attacker has 
-successfully sabotaged the reputation of all of a node's peers, so they 
-no longer have access to the **protected bucket** which reserves 
-resources for high reputation peers during an attack.
+When the attacker manages to successfully sabotage the reputation and 
+fill up **general slots**, the channel is effectively jammed because 
+peers looking to use the channel do not have access to the 
+**projected slots** that are reserved for high reputation peers. This 
+may be abused in various ways, and we encourage you to explore them!
 
 ### Development Environment
 
