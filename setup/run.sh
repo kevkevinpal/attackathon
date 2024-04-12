@@ -20,6 +20,8 @@ export LND_2_RPCSERVER="lightning-2.warnet-armada"
 export LND_2_CERT="/credentials/lnd2-tls.cert"
 export LND_2_MACAROON="/credentials/lnd2-admin.macaroon"
 
+export TARGET=$(cat target.txt)
+
 # Fill in code here to:
 # - Clone your repo
 # - Install your program
