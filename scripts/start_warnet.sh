@@ -35,7 +35,7 @@ git checkout carla/attackathon > /dev/null 2>&1 || { echo "Failed to checkout ca
 
 docker_info=$(docker info)
 
-if grep -q "Context:.*desktop" <<< "$docker_info"; then
+if grep -q "Operating System:.*Desktop" <<< "$docker_info"; then
     echo "Starting warnet for docker desktop."
     just startd
 else
