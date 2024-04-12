@@ -6,18 +6,21 @@ if [ ! -d "credentials" ]; then
 	exit 1
 fi
 
-# These are the paths to the certs/macaroons you'll need to talk to LND.
-lnd_0_rpcserver="lightning-0.warnet-armada"
-lnd_0_cert="/credentials/lnd0-tls.cert"
-lnd_0_macaroon="/credentials/lnd0-admin.macaroon"
+# LND credentials are exported as environment variables for 
+# your program to use.
+export LND_0_RPCSERVER="lightning-0.warnet-armada"
+export LND_0_CERT="/credentials/lnd0-tls.cert"
+export LND_0_MACAROON="/credentials/lnd0-admin.macaroon"
 
-lnd_1_rpcserver="lightning-1.warnet-armada"
-lnd_1_cert="/credentials/lnd1-tls.cert"
-lnd_1_macaroon="/credentials/lnd1-admin.macaroon"
+export LND_1_RPCSERVER="lightning-1.warnet-armada"
+export LND_1_CERT="/credentials/lnd1-tls.cert"
+export LND_1_MACAROON="/credentials/lnd1-admin.macaroon"
 
-lnd_2_rpcserver="lightning-2.warnet-armada"
-lnd_2_cert="/credentials/lnd2-tls.cert"
-lnd_2_macaroon="/credentials/lnd2-admin.macaroon"
+export LND_2_RPCSERVER="lightning-2.warnet-armada"
+export LND_2_CERT="/credentials/lnd2-tls.cert"
+export LND_2_MACAROON="/credentials/lnd2-admin.macaroon"
+
+export TARGET=$(cat target.txt)
 
 # Fill in code here to:
 # - Clone your repo

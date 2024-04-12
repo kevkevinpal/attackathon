@@ -24,3 +24,10 @@ done
 
 echo "Copying in attacking node credentials"
 ./attackathon/scripts/credentials.sh
+
+# TODO: we'll need to set this differently for ln_10 vs ln_100
+target_info=$(warcli lncli 0 getinfo)
+target_pubkey=$(echo "$target_info" | jq -r '.identity_pubkey')
+
+echo "Setting target node pubkey: $target_pubkey in target.txt"
+kubectl exec -it flagship -n warnet-armada -- bash -c 'echo '$target_pubkey' > /target.txt'
