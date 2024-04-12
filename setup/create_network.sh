@@ -115,8 +115,6 @@ fi
 # will use our generated data.
 echo "Generating warnet file for network"
 cd warnet 
-python3 -m venv .venv > /dev/null 2>&1 
-source .venv/bin/activate > /dev/null 2>&1 
 pip install -e . > /dev/null 2>&1 
 
 # Run warnet in the background and capture pid for shutdown.
