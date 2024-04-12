@@ -33,13 +33,33 @@ echo "TODO: remove me when attackathon/18 has been addressed!"
 git fetch carla > /dev/null 2>&1 || { echo "Failed to fetch carla"; exit 1; }
 git checkout carla/attackathon > /dev/null 2>&1 || { echo "Failed to checkout carla/attackathon"; exit 1; }
 
+# Check whether running docker desktop or minikube.
 docker_info=$(docker info)
-
 if grep -q "Operating System:.*Desktop" <<< "$docker_info"; then
-    echo "Starting warnet for docker desktop."
+    docker_desktop=true
+else
+    docker_desktop=false
+fi
+
+# Only ask this question once, otherwise it's annoying.
+if [ "$docker_desktop" = true ]; then
+    echo "Detected docker desktop running."
+else
+    echo "Detected minikube running."
+fi
+
+read -p "Is this correct (y/n): " confirm
+if [ "$confirm" != "y" ]; then
+    echo "Unable to detect kubernetes platform - please open an issue with the output of $ docker info"
+    exit 1
+fi
+
+# Check Docker info and start accordingly
+if [ "$docker_desktop" = true ]; then
+    echo "Starting warnet for Docker Desktop."
     just startd
 else
-    echo "Starting warnet for docker."
+    echo "Starting warnet for Docker."
     just start
 fi
 
