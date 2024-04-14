@@ -11,6 +11,16 @@ check_command() {
 check_command just
 check_command docker
 
+# Cloning simln
+if [ ! -d "sim-ln" ]; then
+    git clone https://github.com/bitcoin-dev-project/sim-ln.git
+fi
+
+# Cloning circuitbreaker
+if [ ! -d "circuitbreaker" ]; then
+    git clone https://github.com/lightningequipment/circuitbreaker.git 
+fi
+
 if [ ! -d "warnet" ]; then
     git clone https://github.com/bitcoin-dev-project/warnet
 fi
